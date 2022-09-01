@@ -16,10 +16,10 @@ MonoBehaviour:
     AppIdRealtime: 2b724b2f-d63d-4842-b232-a027bcb06b06
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
-    AppVersion: 
+    AppIdVoice: 94114a00-56f2-484d-8484-a9777884eebf
+    AppVersion: 0.1
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: eu
     Server: 
     Port: 0
     ProxyServer: 
@@ -28,7 +28,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: 
+  DevRegion: eu
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -39,6 +39,9 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
+  - CantHearYou
+  - ChangeColour
+  - HeresWhy
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
-  DevRegionSetOnce: 0
+  ShowSettings: 1
+  DevRegionSetOnce: 1
