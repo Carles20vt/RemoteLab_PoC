@@ -76,7 +76,7 @@ public class NetworkPlayer : MonoBehaviour
     
     private void UpdateHandAnimation(InputDevice targetDevice, Animator handAnimator)
     {
-        if (!photonView.IsMine)
+        if (!photonView.IsMine || !handAnimator.isActiveAndEnabled)
         {
             return;
         }
