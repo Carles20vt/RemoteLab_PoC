@@ -74,10 +74,23 @@ public class NetworkPlayer : MonoBehaviour
         MapPosition(leftHand, leftHandRig);
         MapPosition(rightHand, rightHandRig);
     }
+
+    private static void MapPosition(Transform targetTransform, Transform rigTransform)
+    {
+        if (rigTransform == null)
+        {
+            return;
+        }
+        
+        targetTransform.position = rigTransform.position;
+        targetTransform.rotation = rigTransform.rotation;
+    }
     
     private void UpdateHandAnimation(InputDevice targetDevice, Animator handAnimator)
     {
-        if (!photonView.IsMine || !handAnimator.isActiveAndEnabled)
+        if (!photonView.IsMine 
+        || handAnimator == null 
+        || !handAnimator.isActiveAndEnabled)
         {
             return;
         }
@@ -116,16 +129,5 @@ public class NetworkPlayer : MonoBehaviour
         {
             playerRendererComponent.enabled = false;
         }
-    }
-
-    private static void MapPosition(Transform targetTarget, Transform rigTransform)
-    {
-        if (rigTransform == null)
-        {
-            return;
-        }
-        
-        targetTarget.position = rigTransform.position;
-        targetTarget.rotation = rigTransform.rotation;
-    }
+    }    
 }
