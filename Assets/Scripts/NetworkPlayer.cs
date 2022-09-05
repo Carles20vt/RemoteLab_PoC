@@ -1,4 +1,3 @@
-using System;
 using Photon.Pun;
 using Unity.XR.CoreUtils;
 using UnityEngine;
@@ -42,6 +41,8 @@ public class NetworkPlayer : MonoBehaviour
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
+
+        name = name + "_" + photonView.ViewID;
 
         DisableMyNetworkPlayerObjects();
     }

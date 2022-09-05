@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 3835950563169872834}
   - component: {fileID: 3835950563169872837}
   - component: {fileID: 3835950563169872836}
+  - component: {fileID: 8834004832860066536}
   m_Layer: 0
   m_Name: NetworkPlayer
   m_TagString: Untagged
@@ -302,6 +303,36 @@ MonoBehaviour:
   AutoCreateRecorderIfNotFound: 0
   UsePrimaryRecorder: 1
   SetupDebugSpeaker: 0
+--- !u!114 &8834004832860066536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50263958601562735}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 958ed00209abf436bbbac40c388139ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head:
+    vrTarget: {fileID: 0}
+    ikTarget: {fileID: 7283586678361446813}
+    trackingPositionOffset: {x: 0, y: -0.08, z: -0.03}
+    trackingRotationOffset: {x: 0, y: 0, z: 0}
+  leftHand:
+    vrTarget: {fileID: 0}
+    ikTarget: {fileID: 7283586677292570840}
+    trackingPositionOffset: {x: -0.05, y: -0.03, z: -0.12}
+    trackingRotationOffset: {x: 0, y: 90, z: 90}
+  rightHand:
+    vrTarget: {fileID: 0}
+    ikTarget: {fileID: 7283586678507056395}
+    trackingPositionOffset: {x: -0.05, y: -0.03, z: -0.12}
+    trackingRotationOffset: {x: 0, y: -90, z: -90}
+  turnSmoothness: 5
+  ikHead: {fileID: 7283586678361446813}
+  headBodyOffset: {x: 0, y: -1.65, z: 0}
 --- !u!1 &409051707482416933
 GameObject:
   m_ObjectHideFlags: 0
@@ -3262,7 +3293,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7283586678361446813}
   - component: {fileID: 7283586678361446810}
-  - component: {fileID: 7283586678361446811}
   m_Layer: 0
   m_Name: IKHead
   m_TagString: Untagged
@@ -3336,36 +3366,6 @@ MonoBehaviour:
       z: 1
     m_MaintainPositionOffset: 0
     m_MaintainRotationOffset: 0
---- !u!114 &7283586678361446811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7283586678361446812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 958ed00209abf436bbbac40c388139ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  head:
-    vrTarget: {fileID: 0}
-    ikTarget: {fileID: 7283586678361446813}
-    trackingPositionOffset: {x: 0, y: -0.08, z: -0.03}
-    trackingRotationOffset: {x: 0, y: 0, z: 0}
-  leftHand:
-    vrTarget: {fileID: 0}
-    ikTarget: {fileID: 7283586677292570840}
-    trackingPositionOffset: {x: -0.05, y: -0.03, z: -0.12}
-    trackingRotationOffset: {x: 0, y: 90, z: 90}
-  rightHand:
-    vrTarget: {fileID: 0}
-    ikTarget: {fileID: 7283586678507056395}
-    trackingPositionOffset: {x: -0.05, y: -0.03, z: -0.12}
-    trackingRotationOffset: {x: 0, y: -90, z: -90}
-  turnSmoothness: 5
-  ikHead: {fileID: 7283586678361446813}
-  headBodyOffset: {x: 0, y: -1.65, z: 0}
 --- !u!1 &7283586678507056394
 GameObject:
   m_ObjectHideFlags: 0
