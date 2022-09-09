@@ -1,48 +1,60 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class DrinkMachineButton : MonoBehaviour
+namespace DrinkMachine
 {
-
-    private MeshRenderer meshRenderer;
-
-    // Start is called before the first frame update
-    void Start()
+    [RequireComponent(typeof(MeshRenderer))]
+    public class DrinkMachineButton : MonoBehaviour
     {
-        meshRenderer = GetComponent<MeshRenderer>();
-        meshRenderer.material.color = Color.green;
-    }
+        #region Public Properties
 
-    // Update is called once per frame
-    void Update()
-    {
+        [SerializeField] private GameObject drinkItemPrefab;
+        public delegate void OnButtonPressed(DrinkMachineButton pressedButton);
+        public OnButtonPressed ONButtonPressed;
+
+        public Color ButtonColor
+        {
+            set => meshRenderer.material.color = value;
+        }
+
+        public GameObject ItemPrefab => drinkItemPrefab;
+
+        #endregion
         
-    }
+        #region Private Properties
 
-    private void OnCollisionEnter(Collision other)
-    {
-        if(!other.gameObject.CompareTag("Player"))
+        private MeshRenderer meshRenderer;
+
+        #endregion
+
+        private void Start()
         {
-            return;
+            meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.material.color = Color.green;
         }
 
-        ButtonPressed();
-    }
-
-    private void OnTriggerEnter(Collider other) 
-    {
-        if(!other.CompareTag("Player"))
+        private void OnCollisionEnter(Collision other)
         {
-            return;
+            if (!other.gameObject.CompareTag("Player"))
+            {
+                return;
+            }
+
+            ButtonPressed();
         }
 
-        ButtonPressed();
-    }
+        private void OnTriggerEnter(Collider other)
+        {
+            if (!other.CompareTag("Player"))
+            {
+                return;
+            }
 
-    private void ButtonPressed()
-    {
-        meshRenderer.material.color = Color.red;
-        Debug.Log("Button pressed.");
+            ButtonPressed();
+        }
+
+        private void ButtonPressed()
+        {
+            ONButtonPressed?.Invoke(this);
+        }
     }
 }
