@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.InputSystem.Composites;
 
 namespace DrinkMachine
 {
@@ -101,25 +102,18 @@ namespace DrinkMachine
         {
             isBusy = true;
 
-            button.ButtonColor = Color.red;
+            button.SetButtonEnabledStatus(false);
             Debug.Log($"Button {button.name} pressed.");
 
             yield return new WaitForSeconds(timeToServeDrink);
 
             try
             {
-                var spawnedDrinkPrefab =
-                    PhotonNetwork.Instantiate(
-                        button.ItemPrefab.name,
-                        itemDispatcher.position,
-                        itemDispatcher.rotation);
+                if (!button.IsButtonPressedByNetworkPlayer)
+                {
+                    DispenseDrink(button);
+                }
 
-                spawnedDrinkPrefab.name = button.ItemPrefab.name + "_" + dispatchedDrinkItems.Count;
-
-                dispatchedDrinkItems.Add(spawnedDrinkPrefab);
-
-                Debug.Log($"Dispatched {spawnedDrinkPrefab.name}");
-                
                 coinControl.CoinSpent();
             }
             catch (Exception e)
@@ -129,9 +123,24 @@ namespace DrinkMachine
             }
             finally
             {
-                button.ButtonColor = Color.green;
+                button.SetButtonEnabledStatus(true);
                 isBusy = false;
             }
+        }
+
+        private void DispenseDrink(DrinkMachineButton button)
+        {
+            var spawnedDrinkPrefab =
+                PhotonNetwork.Instantiate(
+                    button.ItemPrefab.name,
+                    itemDispatcher.position,
+                    itemDispatcher.rotation);
+
+            spawnedDrinkPrefab.name = button.ItemPrefab.name + "_" + dispatchedDrinkItems.Count;
+
+            dispatchedDrinkItems.Add(spawnedDrinkPrefab);
+
+            Debug.Log($"Dispatched {spawnedDrinkPrefab.name}");
         }
 
         public override void OnLeftRoom()

@@ -110,9 +110,7 @@ MonoBehaviour:
   - {fileID: 1289620459531807432}
   - {fileID: 3932800409557210875}
   - {fileID: 5319033211382253336}
-  - {fileID: 0}
   - {fileID: 2724319867457237976}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -511,6 +509,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Left Hand Model
       objectReference: {fileID: 0}
+    - target: {fileID: 109434732395284509, guid: 63f10a313594e254ba965773027d5a0c,
+        type: 3}
+      propertyPath: m_TagString
+      value: NetworkPlayer
+      objectReference: {fileID: 0}
     - target: {fileID: 109434732395451517, guid: 63f10a313594e254ba965773027d5a0c,
         type: 3}
       propertyPath: m_RootOrder
@@ -580,6 +583,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2728450709129765571}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &9085693031338313530
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619315122481752798}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.08
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5319033211382253336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,6 +693,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Right Hand Model
       objectReference: {fileID: 0}
+    - target: {fileID: 5686134208185362930, guid: ed7376c74f4e3924eac57d1d134e389a,
+        type: 3}
+      propertyPath: m_TagString
+      value: NetworkPlayer
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed7376c74f4e3924eac57d1d134e389a, type: 3}
 --- !u!95 &9103307791629490034 stripped
@@ -697,6 +718,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3511759716283551030}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &5558843164600811261
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9103307791636784324}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.08
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2724319867457237976
 MonoBehaviour:
   m_ObjectHideFlags: 0

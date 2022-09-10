@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace DrinkMachine
 {
+    [RequireComponent(typeof(PhotonView))]
     public class Coin : MonoBehaviour
     {
         #region Public Properties
@@ -12,8 +13,15 @@ namespace DrinkMachine
         #endregion
         
         #region Private Properties
-
+        
+        private PhotonView photonView;
+        
         #endregion
+        
+        private void Start()
+        {
+            photonView = GetComponent<PhotonView>();
+        }
         
         private void OnCollisionEnter(Collision other)
         {
@@ -37,6 +45,7 @@ namespace DrinkMachine
 
         private void DestroyMe()
         {
+            photonView.RequestOwnership();
             PhotonNetwork.Destroy(gameObject);
         }
     }

@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 7355598048710368734}
   - component: {fileID: 1289848475697660030}
   - component: {fileID: 1153434990242817734}
-  - component: {fileID: 642558060857000187}
   - component: {fileID: 4923536205067933247}
+  - component: {fileID: 7705595447748278530}
+  - component: {fileID: 921037504496995166}
+  - component: {fileID: 642558060857000187}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -99,20 +101,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &642558060857000187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3497486158741937005}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58b090dd61726a647b6e9309d9a2a7b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  drinkItemPrefab: {fileID: 2681968360465298015, guid: 6ed9080aac35cc14eb0e4cca61ed6183,
-    type: 3}
 --- !u!54 &4923536205067933247
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -129,3 +117,58 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!95 &7705595447748278530
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497486158741937005}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7f61db3c9343a449292ad64f830666dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &921037504496995166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497486158741937005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: IsEnabled
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
+--- !u!114 &642558060857000187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497486158741937005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58b090dd61726a647b6e9309d9a2a7b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  drinkItemPrefab: {fileID: 2681968360465298015, guid: 6ed9080aac35cc14eb0e4cca61ed6183,
+    type: 3}

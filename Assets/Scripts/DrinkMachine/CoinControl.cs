@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace DrinkMachine
 {
-    [RequireComponent(typeof(MeshRenderer))]
+    [RequireComponent(typeof(MeshRenderer), typeof(Animator))]
     public class CoinControl : MonoBehaviour
     {
         #region Public Properties
@@ -17,6 +17,8 @@ namespace DrinkMachine
         #region Private Properties
 
         private MeshRenderer meshRenderer;
+        private Animator animator;
+        private static readonly int IsEnabled = Animator.StringToHash("IsEnabled");
 
         private int coins;
 
@@ -27,6 +29,7 @@ namespace DrinkMachine
         private void Start()
         {
             meshRenderer = GetComponent<MeshRenderer>();
+            animator = GetComponent<Animator>();
             
             AddCoin(0);
         }
@@ -52,11 +55,16 @@ namespace DrinkMachine
         {
             if (coins <= 0)
             {
-                meshRenderer.material.color = Color.red;
+                SetCoinControlEnabledStatus(false);
                 return;
             }
-            
-            meshRenderer.material.color = Color.green;
+
+            SetCoinControlEnabledStatus(true);
+        }
+
+        private void SetCoinControlEnabledStatus(bool status)
+        {
+            animator.SetBool(IsEnabled, status);
         }
 
         private void OnCollisionEnter(Collision other)
@@ -89,6 +97,16 @@ namespace DrinkMachine
         {
             UseCoin(1);
             ONCoinInserted?.Invoke(IsEnoughCredits);
+        }
+
+        public void EnableCoinControl()
+        {
+            meshRenderer.material.color = Color.green;
+        }
+
+        public void DisableCoinControl()
+        {
+            meshRenderer.material.color = Color.red;
         }
     }
 }
