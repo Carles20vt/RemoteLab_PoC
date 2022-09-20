@@ -1,0 +1,46 @@
+﻿#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine;
+
+namespace TreeislandStudio.Engine.Attributes
+{
+    [CustomPropertyDrawer(typeof(MinMaxRangeAttribute))]
+    public class MinMaxRangeDrawer : PropertyDrawer {
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
+            return base.GetPropertyHeight(property, label) + 16;
+        }
+
+        // Draw the property inside the given rect
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+            // Now draw the property as a Slider or an IntSlider based on whether it is a float or integer.
+            if (property.type != "MinMaxRange")
+                Debug.LogWarning("Use only with MinMaxRange type");
+            else {
+                var range = attribute as MinMaxRangeAttribute;
+                var minValue = property.FindPropertyRelative("rangeStart");
+                var maxValue = property.FindPropertyRelative("rangeEnd");
+                var newMin = minValue.floatValue;
+                var newMax = maxValue.floatValue;
+
+                var xDivision = position.width * 0.33f;
+                var yDivision = position.height * 0.5f;
+                var padding = 5f;
+
+                EditorGUI.LabelField(new Rect(position.x, position.y, xDivision, yDivision), label, EditorStyles.boldLabel);
+
+                EditorGUI.LabelField(new Rect(position.x, position.y + yDivision, position.width, yDivision), range.minLimit.ToString("0.##"));
+                EditorGUI.LabelField(new Rect(position.x + position.width - 28f, position.y + yDivision, position.width, yDivision), range.maxLimit.ToString("0.##"));
+                EditorGUI.MinMaxSlider(new Rect(position.x + 28, position.y + yDivision, position.width - 58, yDivision), ref newMin, ref newMax, range.minLimit, range.maxLimit);
+
+                EditorGUI.LabelField(new Rect(position.x + xDivision + padding, position.y, xDivision, yDivision), "From: ");
+                newMin = Mathf.Clamp(EditorGUI.FloatField(new Rect(position.x + xDivision + 38 + padding, position.y, (xDivision - 38) - padding, yDivision), newMin), range.minLimit, newMax);
+                EditorGUI.LabelField(new Rect(position.x + xDivision * 2f + padding, position.y, xDivision, yDivision), "To: ");
+                newMax = Mathf.Clamp(EditorGUI.FloatField(new Rect(position.x + xDivision * 2f + padding + 26, position.y, (xDivision - 26) - padding, yDivision), newMax), newMin, range.maxLimit);
+
+                minValue.floatValue = newMin;
+                maxValue.floatValue = newMax;
+            }
+        }
+    }
+}
+#endif
