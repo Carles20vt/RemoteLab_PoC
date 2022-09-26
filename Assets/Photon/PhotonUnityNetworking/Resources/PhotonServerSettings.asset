@@ -42,6 +42,9 @@ MonoBehaviour:
   - CantHearYou
   - ChangeColour
   - HeresWhy
+  - UpdateAvatarMovementFromHmd
+  - SetPlayerMovementMagnitude
+  - SetPlayerMovementVelocity
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

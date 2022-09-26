@@ -11,10 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scene Type 1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Scene_Laboratory_PoC/Scene_Laboratory_PoC.unity
     guid: 18d94e6f67adb4ef9b666d531fe92617
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Scene Type 2.unity
     guid: dae9e9c1da46b6842ac80dfb56365bd3
   - enabled: 1
@@ -29,7 +29,13 @@ EditorBuildSettings:
       type: 2}
     UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: acdc86b1ea86cfc469569a86012c30bb,
       type: 2}
+    com.unity.input.settings: {fileID: 11400000, guid: 8ec0a8b3ca47e4fb6b5936e381e1ab46,
+      type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: 7d95867ddcf0843da87b54adbd592099,
+      type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1a4c68ca72a83449f938d669337cb305,
       type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: a9a6963505ddf7f4d886008c6dc86122,
+      type: 2}
+    xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: e4901a5d1a72742d7ac3879589e9a7e0,
       type: 2}
