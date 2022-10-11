@@ -8,6 +8,7 @@ public class NetworkPlayer : MonoBehaviour
 {
     #region Public Properties
 
+    [SerializeField] private Transform body;
     [SerializeField] private Transform head;
     [SerializeField] private Transform leftHand;
     [SerializeField] private Transform rightHand;
@@ -25,10 +26,11 @@ public class NetworkPlayer : MonoBehaviour
 
     private PhotonView photonView;
 
+    private Transform bodyRig;
     private Transform headRig;
     private Transform leftHandRig;
     private Transform rightHandRig;
-    private CharacterController characterController;
+    //private CharacterController characterController;
     
     private static readonly int Trigger = Animator.StringToHash("Trigger");
     private static readonly int Grip = Animator.StringToHash("Grip");
@@ -45,30 +47,32 @@ public class NetworkPlayer : MonoBehaviour
     private void Start()
     {
         photonView = GetComponent<PhotonView>();
-
-        name = name + "_" + photonView.ViewID;
+        body = body == null ? transform : body;
+        
         networkPlayerVelocity = Vector3.zero;
 
-        DisableMyNetworkPlayerObjects();
+        //DisableMyNetworkPlayerObjects();
     }
 
     private void ConfigureNetworkPlayerRig()
     {
-        var xrOrigin = FindObjectOfType<XROrigin>();
-        headRig = xrOrigin.transform.Find(mainCameraRigName);
-        leftHandRig = xrOrigin.transform.Find(leftHandControllerRigName);
-        rightHandRig = xrOrigin.transform.Find(rightHandControllerRigName);
-        characterController = xrOrigin.GetComponent<CharacterController>();
+        var xrOriginTransform = FindObjectOfType<XROrigin>().transform;
+        bodyRig = xrOriginTransform;
+        headRig = xrOriginTransform.Find(mainCameraRigName);
+        leftHandRig = xrOriginTransform.Find(leftHandControllerRigName);
+        rightHandRig = xrOriginTransform.Find(rightHandControllerRigName);
+
+        //characterController = xrOrigin.GetComponent<CharacterController>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         MapNetworkPlayerObjects();
 
         UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), leftHandAnimator);
         UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.RightHand), rightHandAnimator);
 
-        SendPlayerInformationOverPun();
+        //SendPlayerInformationOverPun();
     }
 
     private void MapNetworkPlayerObjects()
@@ -78,6 +82,7 @@ public class NetworkPlayer : MonoBehaviour
             return;
         }
         
+        MapPosition(body, bodyRig);
         MapPosition(head, headRig);
         MapPosition(leftHand, leftHandRig);
         MapPosition(rightHand, rightHandRig);
@@ -122,6 +127,7 @@ public class NetworkPlayer : MonoBehaviour
         }
     }
 
+    /*
     private void SendPlayerInformationOverPun()
     {
         photonView.RPC("SetPlayerMovementVelocity", RpcTarget.All, characterController.velocity);
@@ -138,12 +144,14 @@ public class NetworkPlayer : MonoBehaviour
         
         Debug.Log($"ViewID: {photonView.ViewID } Network ViewID: {info.photonView.ViewID}");
     }
-
+    */
+/*
     public float GetPlayerMovementMagnitude()
     {
         return networkPlayerVelocity.magnitude;
     }
-
+*/    
+/*
     private void DisableMyNetworkPlayerObjects()
     {
         if (!photonView.IsMine)
@@ -159,5 +167,6 @@ public class NetworkPlayer : MonoBehaviour
         {
             playerRendererComponent.enabled = false;
         }
-    }    
+    } 
+*/   
 }

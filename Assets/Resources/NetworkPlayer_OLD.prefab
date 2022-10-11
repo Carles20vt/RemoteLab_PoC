@@ -465,7 +465,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50263958601562735}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0fc28a78d8a1413a88c5333752d1dcd, type: 3}
   m_Name: 
@@ -490,6 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 958ed00209abf436bbbac40c388139ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  otherAvatar: {fileID: 0}
   localPlayerBodyParts:
   - {fileID: 73650826}
   - {fileID: 1537524690}
@@ -509,9 +510,6 @@ MonoBehaviour:
     ikTarget: {fileID: 7283586678507056395}
     trackingPositionOffset: {x: -0.05, y: -0.03, z: -0.12}
     trackingRotationOffset: {x: 0, y: -90, z: -90}
-  mainCameraRigName: Camera Offset/Main Camera
-  leftHandControllerRigName: Camera Offset/LeftController
-  rightHandControllerRigName: Camera Offset/RightController
   turnSmoothness: 5
   ikHead: {fileID: 7283586678361446813}
   headBodyOffset: {x: 0, y: -1.65, z: 0}

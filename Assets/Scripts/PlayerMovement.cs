@@ -1,7 +1,11 @@
+using System;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Animator), typeof(CharacterController))]
+[RequireComponent(typeof(Animator),
+    typeof(CharacterController),
+    typeof(PhotonView))]
 public class PlayerMovement : MonoBehaviour
 {
     #region Public Properties
@@ -14,20 +18,29 @@ public class PlayerMovement : MonoBehaviour
 
     private Animator animator;
     private CharacterController characterController;
+    private PhotonView photonView;
+    
     private static readonly int Magnitude = Animator.StringToHash("magnitude");
 
     #endregion
+    
+    #region Unity Callback
 
-    // Start is called before the first frame update
     private void Start()
     {
         animator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
+        photonView = GetComponent<PhotonView>();
     }
 
-    // Update is called once per frame
     private void FixedUpdate()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
+
+        DoMovement();
     }
 
     private void OnMove(InputValue movementValue)
@@ -39,6 +52,13 @@ public class PlayerMovement : MonoBehaviour
     {
         //var turnVector = movementValue.Get<Vector2>();
         TurnCharacter();
+    }
+
+    #endregion
+
+    private void DoMovement()
+    {
+        
     }
 
     private void MoveCharacter()
