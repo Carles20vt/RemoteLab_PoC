@@ -26,7 +26,7 @@ public class RpmSetAvatarParentOfXriOrigin : MonoBehaviour
         xrOrigin = FindObjectOfType<XROrigin>();
         photonView = GetComponent<PhotonView>();
         
-        otherPlayersContainer = xrOrigin.transform.Find(otherPlayersContainerName);
+        otherPlayersContainer = GameObject.Find(otherPlayersContainerName).transform;
         otherPlayersContainer = otherPlayersContainer == null ? transform.parent : otherPlayersContainer;
 
         SetParent();

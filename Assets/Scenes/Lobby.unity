@@ -3877,6 +3877,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5195752082400799127, guid: 343bcb22157d4234886fa820c4e2bc50,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5195752083481728337, guid: 343bcb22157d4234886fa820c4e2bc50,
         type: 3}
       propertyPath: m_RootOrder
@@ -3936,6 +3941,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: XR Origin Ray
+      objectReference: {fileID: 0}
+    - target: {fileID: 5195752083549220663, guid: 343bcb22157d4234886fa820c4e2bc50,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5653243623975759971, guid: 343bcb22157d4234886fa820c4e2bc50,
         type: 3}

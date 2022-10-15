@@ -30,12 +30,9 @@ public class NetworkPlayer : MonoBehaviour
     private Transform headRig;
     private Transform leftHandRig;
     private Transform rightHandRig;
-    //private CharacterController characterController;
     
     private static readonly int Trigger = Animator.StringToHash("Trigger");
     private static readonly int Grip = Animator.StringToHash("Grip");
-
-    private Vector3 networkPlayerVelocity;
 
     #endregion
 
@@ -48,10 +45,6 @@ public class NetworkPlayer : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         body = body == null ? transform : body;
-        
-        networkPlayerVelocity = Vector3.zero;
-
-        //DisableMyNetworkPlayerObjects();
     }
 
     private void ConfigureNetworkPlayerRig()
@@ -61,8 +54,6 @@ public class NetworkPlayer : MonoBehaviour
         headRig = xrOriginTransform.Find(mainCameraRigName);
         leftHandRig = xrOriginTransform.Find(leftHandControllerRigName);
         rightHandRig = xrOriginTransform.Find(rightHandControllerRigName);
-
-        //characterController = xrOrigin.GetComponent<CharacterController>();
     }
 
     private void Update()
@@ -71,8 +62,6 @@ public class NetworkPlayer : MonoBehaviour
 
         UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.LeftHand), leftHandAnimator);
         UpdateHandAnimation(InputDevices.GetDeviceAtXRNode(XRNode.RightHand), rightHandAnimator);
-
-        //SendPlayerInformationOverPun();
     }
 
     private void MapNetworkPlayerObjects()
@@ -103,7 +92,8 @@ public class NetworkPlayer : MonoBehaviour
     {
         if (!photonView.IsMine 
         || handAnimator == null 
-        || !handAnimator.isActiveAndEnabled)
+        || !handAnimator.isActiveAndEnabled
+        || !handAnimator.gameObject.activeSelf)
         {
             return;
         }
@@ -126,47 +116,4 @@ public class NetworkPlayer : MonoBehaviour
             handAnimator.SetFloat(Grip, 0);
         }
     }
-
-    /*
-    private void SendPlayerInformationOverPun()
-    {
-        photonView.RPC("SetPlayerMovementVelocity", RpcTarget.All, characterController.velocity);
-    }
-
-    [PunRPC]
-    private void SetPlayerMovementVelocity(Vector3 networkPlayerVelocity, PhotonMessageInfo info)
-    {
-        if (photonView.ViewID == info.photonView.ViewID)
-        {
-            this.networkPlayerVelocity =  networkPlayerVelocity;
-            return;
-        }
-        
-        Debug.Log($"ViewID: {photonView.ViewID } Network ViewID: {info.photonView.ViewID}");
-    }
-    */
-/*
-    public float GetPlayerMovementMagnitude()
-    {
-        return networkPlayerVelocity.magnitude;
-    }
-*/    
-/*
-    private void DisableMyNetworkPlayerObjects()
-    {
-        if (!photonView.IsMine)
-        {
-            return;
-        }
-        
-        head.gameObject.SetActive(false);
-        leftHand.gameObject.SetActive(false);
-        rightHand.gameObject.SetActive(false);
-
-        foreach (var playerRendererComponent in GetComponentsInChildren<Renderer>())
-        {
-            playerRendererComponent.enabled = false;
-        }
-    } 
-*/   
 }

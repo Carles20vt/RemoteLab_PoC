@@ -919,6 +919,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: RPM Avatar
       objectReference: {fileID: 0}
+    - target: {fileID: 7833735485598835803, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8352731117091735497, guid: 11861e427e0f74901a878bdb1cd66ae9,
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform

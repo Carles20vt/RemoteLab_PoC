@@ -61,7 +61,7 @@ public class RpmMovementAnimatorController : MonoBehaviour
         
         //Set the animator
         animator.SetFloat(Magnitude, magnitude);
-        Debug.Log($"Moving player animator with magnitude: {magnitude}.");
+        //Debug.Log($"Moving player animator with magnitude: {magnitude}.");
     }
     
     private void UpdateAvatarRotationFromHmd()
@@ -75,7 +75,7 @@ public class RpmMovementAnimatorController : MonoBehaviour
         
         lastAvatarRotation = currentAvatarRotation;
         
-        Debug.Log($"HMD Rotation: {deltaAngle}");
+        //Debug.Log($"HMD Rotation: {deltaAngle}");
     }
     
     #endregion
