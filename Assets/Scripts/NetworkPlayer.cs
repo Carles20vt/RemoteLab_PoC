@@ -8,6 +8,8 @@ public class NetworkPlayer : MonoBehaviour
 {
     #region Public Properties
 
+    [SerializeField] private Transform rpmAvatar;
+
     [SerializeField] private Transform body;
     [SerializeField] private Transform head;
     [SerializeField] private Transform leftHand;
@@ -45,12 +47,30 @@ public class NetworkPlayer : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         body = body == null ? transform : body;
+
+        SetupVrRig();
+    }
+    
+    private void SetupVrRig()
+    {
+        if (!photonView.IsMine)
+        {
+            rpmAvatar.gameObject.SetActive(true);
+            return;
+        }
+
+        rpmAvatar.gameObject.SetActive(false);
+        
+        leftHandAnimator.gameObject.SetActive(true);
+        rightHandAnimator.gameObject.SetActive(true);
     }
 
     private void ConfigureNetworkPlayerRig()
     {
         var xrOriginTransform = FindObjectOfType<XROrigin>().transform;
-        bodyRig = xrOriginTransform;
+        //bodyRig = xrOriginTransform;
+        // TODO: Check bodyRig
+        bodyRig = xrOriginTransform.Find(mainCameraRigName);
         headRig = xrOriginTransform.Find(mainCameraRigName);
         leftHandRig = xrOriginTransform.Find(leftHandControllerRigName);
         rightHandRig = xrOriginTransform.Find(rightHandControllerRigName);

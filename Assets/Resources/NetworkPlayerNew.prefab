@@ -518,6 +518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0fc28a78d8a1413a88c5333752d1dcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rpmAvatar: {fileID: 7911870412361579500}
   body: {fileID: 4762567544882837187}
   head: {fileID: 180442245396784316}
   leftHand: {fileID: 813524511390334014}
@@ -854,6 +855,24 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 180442245396784316}
+    - target: {fileID: 1964731921, guid: 11861e427e0f74901a878bdb1cd66ae9, type: 3}
+      propertyPath: yOffSet
+      value: -1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964731921, guid: 11861e427e0f74901a878bdb1cd66ae9, type: 3}
+      propertyPath: objectToObserve
+      value: 
+      objectReference: {fileID: 4762567544882837187}
+    - target: {fileID: 891112465425141853, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: m_Data.m_MaintainPositionOffset
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 891112465425141853, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: m_Data.m_ConstrainedPositionAxes.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 891112465425141853, guid: 11861e427e0f74901a878bdb1cd66ae9,
         type: 3}
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
@@ -914,10 +933,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2717631448204882752, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3859191785666400766, guid: 11861e427e0f74901a878bdb1cd66ae9,
         type: 3}
       propertyPath: m_Name
       value: RPM Avatar
+      objectReference: {fileID: 0}
+    - target: {fileID: 3859191785666400766, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7621002528125340462, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.73
       objectReference: {fileID: 0}
     - target: {fileID: 7833735485598835803, guid: 11861e427e0f74901a878bdb1cd66ae9,
         type: 3}
@@ -934,6 +968,11 @@ PrefabInstance:
       propertyPath: m_Data.m_SourceObjects.m_Item0.transform
       value: 
       objectReference: {fileID: 180442245396784316}
+    - target: {fileID: 8352731117562225908, guid: 11861e427e0f74901a878bdb1cd66ae9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8352731117562225908, guid: 11861e427e0f74901a878bdb1cd66ae9,
         type: 3}
       propertyPath: walkMovementVelocity

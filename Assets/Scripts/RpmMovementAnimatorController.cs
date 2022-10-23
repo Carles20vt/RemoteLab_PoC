@@ -1,5 +1,4 @@
 using System;
-using Photon.Pun;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
