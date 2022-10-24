@@ -4,17 +4,22 @@ namespace TreeislandStudio.Engine.StateMachine
 {
     public abstract class State
     {
-        public string AnimatorStateName = string.Empty;
-        protected readonly ICharacter Character;
+        public string StateName = string.Empty;
+        
+        #region Private Properties
+        
+        private readonly IMachinery machinery;
         protected readonly StateMachine StateMachine;
+        
+        #endregion
 
-        protected State(ICharacter character, StateMachine stateMachine)
+        protected State(IMachinery machinery, StateMachine stateMachine)
         {
-            Character = character; 
-            StateMachine = stateMachine;
+            this.machinery = machinery; 
+            this.StateMachine = stateMachine;
         }
 
-        public virtual void Enter() { }
+        public virtual void Enter() {}
 
         public virtual void HandleInput() {}
 

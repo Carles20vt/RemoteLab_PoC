@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace DrinkMachine
+namespace RemoteLab.DrinkMachine
 {
     [RequireComponent(typeof(MeshRenderer), typeof(Animator))]
     public class DrinkMachineButton : MonoBehaviour

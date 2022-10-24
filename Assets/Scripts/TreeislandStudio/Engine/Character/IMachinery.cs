@@ -1,6 +1,6 @@
 namespace TreeislandStudio.Engine.Character
 {
-    public interface ICharacter
+    public interface IMachinery
     {
         
     }

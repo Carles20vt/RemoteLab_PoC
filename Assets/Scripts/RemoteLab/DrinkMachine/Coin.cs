@@ -1,7 +1,7 @@
 using Photon.Pun;
 using UnityEngine;
 
-namespace DrinkMachine
+namespace RemoteLab.DrinkMachine
 {
     [RequireComponent(typeof(PhotonView))]
     public class Coin : MonoBehaviour

@@ -24,11 +24,11 @@ namespace TreeislandStudio.Engine.StateMachine
         /// <summary>
         /// EventAgent
         /// </summary>
-        //private readonly EventAgent _eventAgent;
+        private readonly EventAgent eventAgent;
 
-        public StateMachine(/*EventAgent eventAgent,*/ Transform senderTransform)
+        public StateMachine(EventAgent eventAgent, Transform senderTransform)
         {
-            //_eventAgent = eventAgent;
+            this.eventAgent = eventAgent;
             this.senderTransform = senderTransform;
         }
 
@@ -40,7 +40,7 @@ namespace TreeislandStudio.Engine.StateMachine
             
             startingState.Enter();
             
-            //_eventAgent.Publish(new StateMachineChanged(_senderTransform, startingState));
+            eventAgent.Publish(new StateMachineChanged(senderTransform, startingState));
         }
 
         public void ChangeState(State newState)
@@ -54,7 +54,7 @@ namespace TreeislandStudio.Engine.StateMachine
             CurrentState = newState;
             newState.Enter();
 
-            //_eventAgent.Publish(new StateMachineChanged(_senderTransform, newState));
+            eventAgent.Publish(new StateMachineChanged(senderTransform, newState));
         }
     }
 }

@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
-using UnityEngine.InputSystem.Composites;
 
-namespace DrinkMachine
+namespace RemoteLab.DrinkMachine
 {
     public class DrinkDispenser : MonoBehaviourPunCallbacks
     {

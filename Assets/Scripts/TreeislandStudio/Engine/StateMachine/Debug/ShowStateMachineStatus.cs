@@ -43,7 +43,6 @@ namespace TreeislandStudio.Engine.StateMachine.Debug
         private void Awake()
         {
             _tmpText = GetComponent<TMP_Text>();
-            //_parentTransform = GetComponentInParent<ICharacter>().transform;
             _parentTransform = transform.parent;
             
             _eventAgent.Subscribe<StateMachineChanged>(OnStateMachineChanged);
@@ -56,7 +55,7 @@ namespace TreeislandStudio.Engine.StateMachine.Debug
                 return;
             }
 
-            _tmpText.text = message.NewState.AnimatorStateName;
+            _tmpText.text = message.NewState.StateName;
         }
 
         #endregion
