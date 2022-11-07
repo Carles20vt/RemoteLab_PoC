@@ -1,8 +1,11 @@
 using System;
+using RemoteLab.Machinery.Centrifuge.Lid;
+using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using RemoteLab.Machinery.Centrifuge.States;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
+using UnityEngine;
 using Zenject;
 
 namespace RemoteLab.Machinery.Centrifuge
@@ -18,10 +21,11 @@ namespace RemoteLab.Machinery.Centrifuge
         public IdleState IdleState { get; private set; }
         public ClosedTopCoverState ClosedTopCoverState { get; private set; }
         public EnterParametersState EnterParametersState { get; private set; }
-        public FinishedState FinishedState { get; private set; }
         public OpenTopCoverState OpenTopCoverState { get; private set; }
         public RemoveSamplesState RemoveSamplesState { get; private set; }
         public RunningState RunningState { get; private set; }
+
+        [SerializeField] private GameObject lidGameObject;
 
         #endregion
         
@@ -53,9 +57,16 @@ namespace RemoteLab.Machinery.Centrifuge
         #endregion
         
         #region MonoBehaviour Callbacks
-        
+
+        public void Awake()
+        {
+            SubscribeToEvents();
+        }
+
         public void Start()
         {
+            lidGameObject ??= GetComponentInChildren<CentrifugeLid>()?.gameObject;
+            
             SetupInstrumentStateMachine();
         }
 
@@ -81,6 +92,25 @@ namespace RemoteLab.Machinery.Centrifuge
             instrumentStateMachine.CurrentState?.PhysicsUpdate();
         }
 
+        #endregion
+        
+        #region Events
+
+        private void SubscribeToEvents()
+        {
+            eventAgent.Subscribe<CentrifugeLidChanged>(OnCentrifugeLidChanged);
+        }
+        
+        private void OnCentrifugeLidChanged(CentrifugeLidChanged message)
+        {
+            if (!ReferenceEquals(lidGameObject.transform, message.Sender))
+            {
+                return;
+            }
+
+            IsLidOpened = message.IsLidOpen;
+        }
+        
         #endregion
         
         #region Public Methods
@@ -111,7 +141,6 @@ namespace RemoteLab.Machinery.Centrifuge
             IdleState = new IdleState(this, instrumentStateMachine);
             ClosedTopCoverState = new ClosedTopCoverState(this, instrumentStateMachine);
             EnterParametersState = new EnterParametersState(this, instrumentStateMachine);
-            FinishedState = new FinishedState(this, instrumentStateMachine);
             OpenTopCoverState = new OpenTopCoverState(this, instrumentStateMachine);
             RemoveSamplesState = new RemoveSamplesState(this, instrumentStateMachine);
             RunningState = new RunningState(this, instrumentStateMachine);

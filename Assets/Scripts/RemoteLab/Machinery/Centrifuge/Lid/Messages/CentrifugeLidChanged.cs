@@ -1,13 +1,13 @@
 using TreeislandStudio.Engine.Event.Event;
 using UnityEngine;
 
-namespace TreeislandStudio.Engine.StateMachine.Messages
+namespace RemoteLab.Machinery.Centrifuge.Lid.Messages
 {
     /// <inheritdoc />
     /// <summary>
-    /// Sent when the StateMachine changes the state.
+    /// Sent when the Centrifuge Lid changes the state.
     /// </summary>
-    public class StateMachineChanged : EventMessage
+    public class CentrifugeLidChanged : EventMessage
     {
         #region Public properties
 
@@ -19,7 +19,7 @@ namespace TreeislandStudio.Engine.StateMachine.Messages
         /// <summary>
         /// Position.
         /// </summary>
-        public readonly State NewState;
+        public readonly bool IsLidOpen;
 
         #endregion
         
@@ -29,11 +29,11 @@ namespace TreeislandStudio.Engine.StateMachine.Messages
         /// Constructor
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="newState"></param>
-        public StateMachineChanged(Transform sender, State newState)
+        /// <param name="islIdOpen"></param>
+        public CentrifugeLidChanged(Transform sender, bool islIdOpen)
         {
             Sender = sender;
-            NewState = newState;
+            IsLidOpen = islIdOpen;
         }
         
         #endregion
