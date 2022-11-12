@@ -1,4 +1,3 @@
-using System;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using TreeislandStudio.Engine;
