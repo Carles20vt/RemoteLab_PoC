@@ -90,6 +90,11 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void SetRotorColor(bool lidOpen)
         {
+            if (meshRenderer == null)
+            {
+                return;
+            }
+            
             if (lidOpen)
             {
                 meshRenderer.material.color = Color.green;
