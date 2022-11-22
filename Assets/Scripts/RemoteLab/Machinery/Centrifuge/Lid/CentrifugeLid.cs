@@ -13,13 +13,13 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
     {
         #region Public Properties
 
-        [SerializeField] [Range(0f, 10f)] private float rotateSpeed = 5f;
-        [SerializeField] [Range(0f, 360f)] private float rotationAngleDegrees = 90f;
         [SerializeField] [Range(0f, 10f)] private float angleEpsilon = 1f;
         
         #endregion
         
         #region Private Properties
+        
+        private Transform centrifugeParentTransform;
 
         private new HingeJoint hingeJoint;
 
@@ -52,6 +52,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         
         private void Start()
         {
+            centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             hingeJoint = GetComponent<HingeJoint>();
 
             SendLidStatus();
@@ -99,7 +100,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
             lastLidOpenStatus = currentLidStatus;
 
-            eventAgent.Publish(new CentrifugeLidChanged(transform, currentLidStatus));
+            eventAgent.Publish(new CentrifugeLidChanged(centrifugeParentTransform, currentLidStatus));
         }
         
         private bool IsLidOpened()

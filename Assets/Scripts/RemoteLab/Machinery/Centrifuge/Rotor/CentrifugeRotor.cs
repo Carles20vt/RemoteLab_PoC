@@ -21,6 +21,8 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         #endregion
         
         #region Private Properties
+        
+        private Transform centrifugeParentTransform;
 
         private MeshRenderer meshRenderer;
 
@@ -57,6 +59,8 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         private void Start()
         {
             vials = new List<Vial>();
+            
+            centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             meshRenderer = GetComponent<MeshRenderer>();
             lidGameObject ??= transform.parent.GetComponentInChildren<CentrifugeLid>()?.gameObject;
             
@@ -81,6 +85,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
             
             vials.Add(vial);
+            CheckRotorCompartment();
         }
         
         private void OnCollisionExit(Collision collision)
@@ -93,6 +98,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
             
             vials.Remove(vial);
+            CheckRotorCompartment();
         }
 
         #endregion
@@ -106,13 +112,12 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         
         private void OnCentrifugeLidChanged(CentrifugeLidChanged message)
         {
-            if (!ReferenceEquals(lidGameObject.transform, message.Sender))
+            if (!ReferenceEquals(centrifugeParentTransform, message.Sender))
             {
                 return;
             }
 
             SetRotorColor(message.IsLidOpen);
-            CheckRotorCompartment(message.IsLidOpen);
         }
         
         #endregion
@@ -135,14 +140,9 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             meshRenderer.material.color = Color.red;
         }
 
-        private void CheckRotorCompartment(bool lidOpen)
+        private void CheckRotorCompartment()
         {
-            if (lidOpen)
-            {
-                return;
-            }
-            
-            eventAgent.Publish(new CentrifugeRotorChanged(transform, vials.Count > 0));
+            eventAgent.Publish(new CentrifugeRotorChanged(centrifugeParentTransform, vials.Count > 0));
         }
 
         #endregion

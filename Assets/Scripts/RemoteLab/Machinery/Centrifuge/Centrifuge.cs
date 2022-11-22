@@ -2,6 +2,7 @@ using System;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
+using RemoteLab.Machinery.Centrifuge.Screen.Messages;
 using RemoteLab.Machinery.Centrifuge.States;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
@@ -25,9 +26,6 @@ namespace RemoteLab.Machinery.Centrifuge
         public OpenTopCoverState OpenTopCoverState { get; private set; }
         public RemoveSamplesState RemoveSamplesState { get; private set; }
         public RunningState RunningState { get; private set; }
-
-        [SerializeField] private GameObject lidGameObject;
-        [SerializeField] private GameObject rotorGameObject;
 
         #endregion
         
@@ -67,8 +65,6 @@ namespace RemoteLab.Machinery.Centrifuge
 
         public void Start()
         {
-            lidGameObject ??= GetComponentInChildren<CentrifugeLid>()?.gameObject;
-            
             SetupInstrumentStateMachine();
         }
 
@@ -102,11 +98,12 @@ namespace RemoteLab.Machinery.Centrifuge
         {
             eventAgent.Subscribe<CentrifugeLidChanged>(OnCentrifugeLidChanged);
             eventAgent.Subscribe<CentrifugeRotorChanged>(OnCentrifugeRotorChanged);
+            eventAgent.Subscribe<CentrifugeRunningStatusChanged>(OnCentrifugeRunningStatusChanged);
         }
         
         private void OnCentrifugeLidChanged(CentrifugeLidChanged message)
         {
-            if (!ReferenceEquals(lidGameObject.transform, message.Sender))
+            if (!ReferenceEquals(transform, message.Sender))
             {
                 return;
             }
@@ -116,12 +113,23 @@ namespace RemoteLab.Machinery.Centrifuge
         
         private void OnCentrifugeRotorChanged(CentrifugeRotorChanged message)
         {
-            if (!ReferenceEquals(rotorGameObject.transform, message.Sender))
+            if (!ReferenceEquals(transform, message.Sender))
             {
                 return;
             }
 
             IsSampleInside = message.IsRotorWithVialsInside;
+        }
+        
+        private void OnCentrifugeRunningStatusChanged(CentrifugeRunningStatusChanged message)
+        {
+            if (!ReferenceEquals(transform, message.Sender))
+            {
+                return;
+            }
+
+            IsParametersEntered = message.IsRunning;
+            IsCentrifugationFinished = !message.IsRunning;
         }
         
         #endregion

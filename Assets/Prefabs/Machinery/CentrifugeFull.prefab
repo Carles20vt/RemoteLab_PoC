@@ -358,13 +358,13 @@ GameObject:
   - component: {fileID: 5704716800512952977}
   - component: {fileID: 5704716800512952978}
   - component: {fileID: 5704716800512952979}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &5704716800512953068
 RectTransform:
   m_ObjectHideFlags: 0
@@ -374,7 +374,7 @@ RectTransform:
   m_GameObject: {fileID: 5704716800512953069}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5127, y: 1.5127, z: 1.5127}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5704716801719756887}
@@ -467,7 +467,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5704716800512952978}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 166304331}
+        m_TargetAssemblyTypeName: RemoteLab.Machinery.Centrifuge.Screen.CentrifugeScreen,
+          Assembly-CSharp
+        m_MethodName: OnStartButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5704716800529735873
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,7 +490,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704716800529735872}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -516,7 +529,7 @@ GameObject:
   - component: {fileID: 5704716800556454713}
   - component: {fileID: 5704716800556454719}
   - component: {fileID: 5704716800556454712}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1054,7 +1067,7 @@ GameObject:
   - component: {fileID: 5704716800715160349}
   - component: {fileID: 5704716800715160323}
   - component: {fileID: 5704716800715160348}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2690,7 +2703,7 @@ GameObject:
   - component: {fileID: 5704716801141884369}
   - component: {fileID: 5704716801141884375}
   - component: {fileID: 5704716801141884368}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MinutesSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2931,7 +2944,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704716801155188222}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3756,7 +3769,7 @@ GameObject:
   - component: {fileID: 5704716801355864825}
   - component: {fileID: 5704716801355864831}
   - component: {fileID: 5704716801355864824}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3833,6 +3846,7 @@ GameObject:
   - component: {fileID: 5704716801364150281}
   - component: {fileID: 5704716801364150282}
   - component: {fileID: 5704716801364150283}
+  - component: {fileID: 876843765}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -3922,6 +3936,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &876843765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704716801364150277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7951c64acb0fa62458bf30a60089fe2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 0
+  m_CheckFor2DOcclusion: 0
+  m_CheckFor3DOcclusion: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RaycastTriggerInteraction: 1
 --- !u!1 &5704716801365899098
 GameObject:
   m_ObjectHideFlags: 0
@@ -3931,7 +3964,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704716801365899097}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4059,7 +4092,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5704716801370915557}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.199, y: 0.528, z: -0.19200003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4081,8 +4114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 011cb44e957c4d2d960947472cf734bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lidGameObject: {fileID: 6450515878076775870}
-  rotorGameObject: {fileID: 9124719489620480580}
 --- !u!1 &5704716801437884815
 GameObject:
   m_ObjectHideFlags: 0
@@ -5057,7 +5088,7 @@ GameObject:
   - component: {fileID: 5704716801646923538}
   - component: {fileID: 5704716801646923536}
   - component: {fileID: 5704716801646923537}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: RpmSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5347,7 +5378,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5704716801703930000}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5386,7 +5417,7 @@ GameObject:
   - component: {fileID: 5704716801719756887}
   - component: {fileID: 5704716801719756885}
   - component: {fileID: 5704716801719756886}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5441,7 +5472,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5743,7 +5774,7 @@ GameObject:
   - component: {fileID: 5704716801801517392}
   - component: {fileID: 5704716801801517398}
   - component: {fileID: 5704716801801517399}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5991,7 +6022,7 @@ GameObject:
   - component: {fileID: 5704716801866208125}
   - component: {fileID: 5704716801866208099}
   - component: {fileID: 5704716801866208124}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6428,7 +6459,7 @@ GameObject:
   - component: {fileID: 5704716802047093076}
   - component: {fileID: 5704716802047093082}
   - component: {fileID: 5704716802047093083}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7047,6 +7078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5704716802125249710}
   - component: {fileID: 5704716802125249709}
+  - component: {fileID: 166304331}
   m_Layer: 0
   m_Name: Screens
   m_TagString: Untagged
@@ -7097,6 +7129,19 @@ MonoBehaviour:
   runningStateScreenGameObject: {fileID: 5704716801726121239}
   removeSamplesScreenGameObject: {fileID: 5704716800963641856}
   centrifuge: {fileID: 5704716801370915563}
+--- !u!114 &166304331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5704716802125249711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1abf277c8054d5cb0fa8c786f76fe01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runningTime: 3
 --- !u!1 &5704716802201219632
 GameObject:
   m_ObjectHideFlags: 0
@@ -7108,7 +7153,7 @@ GameObject:
   - component: {fileID: 5704716802201219639}
   - component: {fileID: 5704716802201219637}
   - component: {fileID: 5704716802201219638}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7719,7 +7764,7 @@ GameObject:
   - component: {fileID: 5704716802426851198}
   - component: {fileID: 5704716802426851196}
   - component: {fileID: 5704716802426851197}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8021,12 +8066,6 @@ PrefabInstance:
 --- !u!4 &4424211318758088042 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 711698151034006968, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
-    type: 3}
-  m_PrefabInstance: {fileID: 3784573395320549586}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &6450515878076775870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7854655365213965676, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
     type: 3}
   m_PrefabInstance: {fileID: 3784573395320549586}
   m_PrefabAsset: {fileID: 0}

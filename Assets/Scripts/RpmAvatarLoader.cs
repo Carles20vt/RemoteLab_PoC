@@ -1,5 +1,6 @@
 using Photon.Pun;
 using ReadyPlayerMe;
+using RemoteLab.Characters;
 using UnityEngine;
 
 [RequireComponent(typeof(PhotonView))]
