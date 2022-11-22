@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
+using RemoteLab.Supplies;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
@@ -20,6 +23,8 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         #region Private Properties
 
         private MeshRenderer meshRenderer;
+
+        private List<Vial> vials;
 
         #endregion
         
@@ -51,6 +56,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void Start()
         {
+            vials = new List<Vial>();
             meshRenderer = GetComponent<MeshRenderer>();
             lidGameObject ??= transform.parent.GetComponentInChildren<CentrifugeLid>()?.gameObject;
             
@@ -63,6 +69,30 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         private void OnDestroy()
         {
             eventAgent.Dispose();
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var vial = collision.gameObject.GetComponent<Vial>();
+
+            if (vial == null)
+            {
+                return;
+            }
+            
+            vials.Add(vial);
+        }
+        
+        private void OnCollisionExit(Collision collision)
+        {
+            var vial = collision.gameObject.GetComponent<Vial>();
+
+            if (vial == null)
+            {
+                return;
+            }
+            
+            vials.Remove(vial);
         }
 
         #endregion
@@ -82,6 +112,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
 
             SetRotorColor(message.IsLidOpen);
+            CheckRotorCompartment(message.IsLidOpen);
         }
         
         #endregion
@@ -102,6 +133,16 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
             
             meshRenderer.material.color = Color.red;
+        }
+
+        private void CheckRotorCompartment(bool lidOpen)
+        {
+            if (lidOpen)
+            {
+                return;
+            }
+            
+            eventAgent.Publish(new CentrifugeRotorChanged(transform, vials.Count > 0));
         }
 
         #endregion

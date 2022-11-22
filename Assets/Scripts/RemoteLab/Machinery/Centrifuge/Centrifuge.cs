@@ -1,6 +1,7 @@
 using System;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
 using RemoteLab.Machinery.Centrifuge.States;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
@@ -26,6 +27,7 @@ namespace RemoteLab.Machinery.Centrifuge
         public RunningState RunningState { get; private set; }
 
         [SerializeField] private GameObject lidGameObject;
+        [SerializeField] private GameObject rotorGameObject;
 
         #endregion
         
@@ -99,6 +101,7 @@ namespace RemoteLab.Machinery.Centrifuge
         private void SubscribeToEvents()
         {
             eventAgent.Subscribe<CentrifugeLidChanged>(OnCentrifugeLidChanged);
+            eventAgent.Subscribe<CentrifugeRotorChanged>(OnCentrifugeRotorChanged);
         }
         
         private void OnCentrifugeLidChanged(CentrifugeLidChanged message)
@@ -109,6 +112,16 @@ namespace RemoteLab.Machinery.Centrifuge
             }
 
             IsLidOpened = message.IsLidOpen;
+        }
+        
+        private void OnCentrifugeRotorChanged(CentrifugeRotorChanged message)
+        {
+            if (!ReferenceEquals(rotorGameObject.transform, message.Sender))
+            {
+                return;
+            }
+
+            IsSampleInside = message.IsRotorWithVialsInside;
         }
         
         #endregion
