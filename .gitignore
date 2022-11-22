@@ -58,3 +58,9 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# Rider ignored files
+/modules.xml
+/projectSettingsUpdater.xml
+/.idea.RemoteLab_PoC.iml
+/contentModel.xml
+
