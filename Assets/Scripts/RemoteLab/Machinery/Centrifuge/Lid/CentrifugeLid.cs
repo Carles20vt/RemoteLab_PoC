@@ -1,3 +1,4 @@
+using System.Collections;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
@@ -10,11 +11,21 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
     [RequireComponent(typeof(HingeJoint))]
     public class CentrifugeLid : TreeislandBehaviour
     {
+        #region Public Properties
+
+        [SerializeField] [Range(0f, 10f)] private float angleEpsilon = 1f;
+        
+        #endregion
+        
         #region Private Properties
+        
+        private Transform centrifugeParentTransform;
 
         private new HingeJoint hingeJoint;
 
         private bool lastLidOpenStatus;
+        
+        private Quaternion targetRot = Quaternion.identity;
 
         #endregion
         
@@ -41,6 +52,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         
         private void Start()
         {
+            centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             hingeJoint = GetComponent<HingeJoint>();
 
             SendLidStatus();
@@ -58,7 +70,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         
         #region Events
 
-        private void OnCollisionStay(Collision other)
+        private void OnCollisionExit(Collision other)
         {
             if (!other.gameObject.CompareTag("Player"))
             {
@@ -67,7 +79,12 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
             SendLidStatus();
         }
-        
+
+        public void OnLidStatusChanged()
+        {
+            SendLidStatus();
+        }
+
         #endregion
 
         #region Private Methods
@@ -81,12 +98,14 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
                 return;
             }
 
-            eventAgent.Publish(new CentrifugeLidChanged(transform, currentLidStatus));
+            lastLidOpenStatus = currentLidStatus;
+
+            eventAgent.Publish(new CentrifugeLidChanged(centrifugeParentTransform, currentLidStatus));
         }
         
         private bool IsLidOpened()
         {
-            return hingeJoint.angle > hingeJoint.limits.max - 0.01f;
+            return hingeJoint.angle - angleEpsilon <= hingeJoint.limits.min;
         }
 
         #endregion

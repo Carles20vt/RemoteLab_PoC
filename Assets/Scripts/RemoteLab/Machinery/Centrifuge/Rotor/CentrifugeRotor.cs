@@ -1,6 +1,8 @@
-using System;
+using System.Collections.Generic;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
+using RemoteLab.Supplies;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
@@ -19,8 +21,12 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         #endregion
         
         #region Private Properties
+        
+        private Transform centrifugeParentTransform;
 
         private MeshRenderer meshRenderer;
+
+        private List<Vial> vials;
 
         #endregion
         
@@ -52,6 +58,9 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void Start()
         {
+            vials = new List<Vial>();
+            
+            centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             meshRenderer = GetComponent<MeshRenderer>();
             lidGameObject ??= transform.parent.GetComponentInChildren<CentrifugeLid>()?.gameObject;
             
@@ -66,6 +75,32 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             eventAgent.Dispose();
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            var vial = collision.gameObject.GetComponent<Vial>();
+
+            if (vial == null)
+            {
+                return;
+            }
+            
+            vials.Add(vial);
+            CheckRotorCompartment();
+        }
+        
+        private void OnCollisionExit(Collision collision)
+        {
+            var vial = collision.gameObject.GetComponent<Vial>();
+
+            if (vial == null)
+            {
+                return;
+            }
+            
+            vials.Remove(vial);
+            CheckRotorCompartment();
+        }
+
         #endregion
         
         #region Events
@@ -77,7 +112,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         
         private void OnCentrifugeLidChanged(CentrifugeLidChanged message)
         {
-            if (!ReferenceEquals(lidGameObject.transform, message.Sender))
+            if (!ReferenceEquals(centrifugeParentTransform, message.Sender))
             {
                 return;
             }
@@ -91,6 +126,11 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void SetRotorColor(bool lidOpen)
         {
+            if (meshRenderer == null)
+            {
+                return;
+            }
+            
             if (lidOpen)
             {
                 meshRenderer.material.color = Color.green;
@@ -98,6 +138,11 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
             
             meshRenderer.material.color = Color.red;
+        }
+
+        private void CheckRotorCompartment()
+        {
+            eventAgent.Publish(new CentrifugeRotorChanged(centrifugeParentTransform, vials.Count > 0));
         }
 
         #endregion

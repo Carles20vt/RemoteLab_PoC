@@ -6,8 +6,7 @@ using TreeislandStudio.Engine.StateMachine;
 using TreeislandStudio.Engine.StateMachine.Messages;
 using UnityEngine;
 using Zenject;
-
-namespace RemoteLab.Machinery.Centrifuge
+namespace RemoteLab.Machinery.Centrifuge.Screen
 {
     public class CentrifugeScreenChooser : TreeislandBehaviour
     {

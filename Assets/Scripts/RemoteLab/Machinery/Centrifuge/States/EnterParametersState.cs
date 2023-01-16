@@ -16,16 +16,18 @@ namespace RemoteLab.Machinery.Centrifuge.States
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-
-            if (centrifuge.IsParametersEntered)
-            {
-                StateMachine.ChangeState(centrifuge.RunningState);
-            }
             
-            if (!centrifuge.IsParametersEntered && centrifuge.IsLidOpened)
+            if (centrifuge.IsLidOpened)
             {
                 StateMachine.ChangeState(centrifuge.OpenTopCoverState);
             }
+
+            if (!centrifuge.IsParametersEntered)
+            {
+                return;
+            }
+            
+            StateMachine.ChangeState(centrifuge.RunningState);
         }
     }
 }

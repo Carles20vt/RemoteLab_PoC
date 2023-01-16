@@ -22,11 +22,13 @@ namespace RemoteLab.Machinery.Centrifuge.States
                 StateMachine.ChangeState(centrifuge.EnterParametersState);
                 return;
             }
-            
-            if(!centrifuge.IsLidOpened && !centrifuge.IsSampleInside)
+
+            if (centrifuge.IsLidOpened || centrifuge.IsSampleInside)
             {
-                StateMachine.ChangeState(centrifuge.IdleState);
+                return;
             }
+            
+            StateMachine.ChangeState(centrifuge.IdleState);
         }
     }
 }
