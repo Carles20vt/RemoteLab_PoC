@@ -365,8 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e2468f767442d488b0b40645b5cdff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 5
-  rotationAngleDegrees: 90
   angleEpsilon: 1
 --- !u!114 &1634788760772022254
 MonoBehaviour:

@@ -29,6 +29,8 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
         private Rigidbody myRigidbody;
 
+        private bool wasLidOpen;
+
         #endregion
         
         #region Dependencies
@@ -61,6 +63,15 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
             SendLidStatus();
         }
 
+        private void FixedUpdate()
+        {
+            if(wasLidOpen != IsLidOpened())
+            {
+                OnLidStatusChanged();
+                wasLidOpen = !wasLidOpen;
+            }
+        }
+
         /// <summary>
         /// Destroy event
         /// </summary>
@@ -73,20 +84,11 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         
         #region Events
 
-        private void OnCollisionExit(Collision other)
-        {
-            if (!other.gameObject.CompareTag("Player"))
-            {
-                return;
-            }
-
-            SendLidStatus();
-        }
-
-        public void OnLidStatusChanged()
+        public void OnLidStatusChanged(string msg = "")
         {
             myRigidbody.useGravity = !IsLidOpened();
             SendLidStatus();
+            Debug.Log("ONSTATUS " + msg);
         }
 
         #endregion
