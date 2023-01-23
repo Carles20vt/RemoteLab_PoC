@@ -13,7 +13,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
     {
         #region Public Properties
 
-        [SerializeField] [Range(0f, 10f)] private float angleEpsilon = 1f;
+        [SerializeField] [Range(0f, 50f)] private float angleEpsilon = 1f;
         
         #endregion
         
@@ -26,6 +26,8 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         private bool lastLidOpenStatus;
         
         private Quaternion targetRot = Quaternion.identity;
+
+        private Rigidbody myRigidbody;
 
         #endregion
         
@@ -54,6 +56,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         {
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             hingeJoint = GetComponent<HingeJoint>();
+            myRigidbody = GetComponent<Rigidbody>();
 
             SendLidStatus();
         }
@@ -82,6 +85,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
         public void OnLidStatusChanged()
         {
+            myRigidbody.useGravity = !IsLidOpened();
             SendLidStatus();
         }
 

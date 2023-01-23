@@ -67,11 +67,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlasticVial01 (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 2909904397499212374, guid: 0424553731c27d140a98442f792077d1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7890162271465375492, guid: 0424553731c27d140a98442f792077d1,
         type: 3}
       propertyPath: sceneViewId
@@ -145,11 +140,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlasticVial01 (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2909904397499212374, guid: 0424553731c27d140a98442f792077d1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7890162271465375492, guid: 0424553731c27d140a98442f792077d1,
         type: 3}
@@ -406,11 +396,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlasticVial01 (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 2909904397499212374, guid: 0424553731c27d140a98442f792077d1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7890162271465375492, guid: 0424553731c27d140a98442f792077d1,
         type: 3}
       propertyPath: sceneViewId
@@ -485,11 +470,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlasticVial01 (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 2909904397499212374, guid: 0424553731c27d140a98442f792077d1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
-      objectReference: {fileID: 0}
     - target: {fileID: 7890162271465375492, guid: 0424553731c27d140a98442f792077d1,
         type: 3}
       propertyPath: sceneViewId
@@ -563,11 +543,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlasticVial01 (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2909904397499212374, guid: 0424553731c27d140a98442f792077d1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7890162271465375492, guid: 0424553731c27d140a98442f792077d1,
         type: 3}

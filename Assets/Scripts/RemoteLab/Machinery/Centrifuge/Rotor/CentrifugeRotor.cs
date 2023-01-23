@@ -7,6 +7,7 @@ using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 using Zenject;
 
 namespace RemoteLab.Machinery.Centrifuge.Rotor
@@ -63,7 +64,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             meshRenderer = GetComponent<MeshRenderer>();
             lidGameObject ??= transform.parent.GetComponentInChildren<CentrifugeLid>()?.gameObject;
-            
+
             SetRotorColor(false);
         }
 
@@ -74,23 +75,23 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         {
             eventAgent.Dispose();
         }
-
-        private void OnCollisionEnter(Collision collision)
+        
+        private void OnTriggerEnter(Collider other)
         {
-            var vial = collision.gameObject.GetComponent<Vial>();
+            var vial = other.gameObject.GetComponent<Vial>();
 
             if (vial == null)
-            {
                 return;
-            }
-            
+            if (vials.Contains(vial))
+                return;
+
             vials.Add(vial);
             CheckRotorCompartment();
         }
         
-        private void OnCollisionExit(Collision collision)
+        private void OnTriggerExit(Collider other)
         {
-            var vial = collision.gameObject.GetComponent<Vial>();
+            var vial = other.gameObject.GetComponent<Vial>();
 
             if (vial == null)
             {
@@ -118,6 +119,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
 
             SetRotorColor(message.IsLidOpen);
+            SetInteractable(message.IsLidOpen);
         }
         
         #endregion
@@ -138,6 +140,12 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
             }
             
             meshRenderer.material.color = Color.red;
+        }
+
+        private void SetInteractable(bool lidOpen)
+        {
+            foreach (Vial vial in vials)
+                vial.GetComponent<MeshCollider>().enabled = lidOpen;
         }
 
         private void CheckRotorCompartment()
