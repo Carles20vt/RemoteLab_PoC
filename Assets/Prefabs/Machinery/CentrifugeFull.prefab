@@ -13778,7 +13778,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Colliders.Array.data[1]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 5033368848478574800}
     - target: {fileID: 1634788760772022254, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
       propertyPath: m_InteractionLayers.m_Bits

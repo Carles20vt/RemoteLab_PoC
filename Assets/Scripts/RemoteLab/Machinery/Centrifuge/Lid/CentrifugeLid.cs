@@ -84,11 +84,10 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         
         #region Events
 
-        public void OnLidStatusChanged(string msg = "")
+        public void OnLidStatusChanged()
         {
             myRigidbody.useGravity = !IsLidOpened();
             SendLidStatus();
-            Debug.Log("ONSTATUS " + msg);
         }
 
         #endregion
