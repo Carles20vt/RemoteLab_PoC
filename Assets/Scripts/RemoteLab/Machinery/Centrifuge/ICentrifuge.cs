@@ -9,6 +9,8 @@ namespace RemoteLab.Machinery.Centrifuge
 
         bool IsSampleInside { get; }
         
+        bool IsEnteringParameters { get; }
+        
         IdleState IdleState { get; }
         
         bool IsParametersEntered { get; }

@@ -1,8 +1,11 @@
 using System.Collections;
+using RemoteLab.Characters;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using RemoteLab.Machinery.Centrifuge.States;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
+using TreeislandStudio.Engine.StateMachine.Messages;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +17,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         #region Public Properties
 
         [SerializeField] [Range(0f, 50f)] private float angleEpsilon = 1f;
+        [SerializeField] private XRGrabNetworkInteractable lidInteractable;
         
         #endregion
         
@@ -51,9 +55,13 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         }
 
         #endregion
-        
+
         #region MonoBehaviour Callbacks
-        
+        private void Awake()
+        {
+            SubscribeToEvents();
+        }
+
         private void Start()
         {
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
@@ -81,8 +89,24 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         }
 
         #endregion
-        
+
         #region Events
+
+        private void SubscribeToEvents()
+        {
+            eventAgent.Subscribe<StateMachineChanged>(OnStateMachineChanged);
+        }
+
+        private void OnStateMachineChanged(StateMachineChanged message)
+        {
+            if (!ReferenceEquals(centrifugeParentTransform, message.Sender))
+                return;
+
+            if (typeof(RunningState) == message.NewState.GetType())
+                lidInteractable.enabled = false;
+            else if (!lidInteractable.enabled)
+                lidInteractable.enabled = true;
+        }
 
         public void OnLidStatusChanged()
         {

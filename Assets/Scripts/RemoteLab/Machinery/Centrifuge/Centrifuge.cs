@@ -1,6 +1,7 @@
 using System;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using RemoteLab.Machinery.Centrifuge.Parameters.Messages;
 using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
 using RemoteLab.Machinery.Centrifuge.Screen.Messages;
 using RemoteLab.Machinery.Centrifuge.States;
@@ -17,6 +18,7 @@ namespace RemoteLab.Machinery.Centrifuge
         #region Public Properties
         public bool IsLidOpened { get; private set; }
         public bool IsSampleInside { get; private set; }
+        public bool IsEnteringParameters { get; private set; }
         public bool IsParametersEntered { get; private set; }
         public bool IsCentrifugationFinished { get; private set; }
 
@@ -98,6 +100,7 @@ namespace RemoteLab.Machinery.Centrifuge
         {
             eventAgent.Subscribe<CentrifugeLidChanged>(OnCentrifugeLidChanged);
             eventAgent.Subscribe<CentrifugeRotorChanged>(OnCentrifugeRotorChanged);
+            eventAgent.Subscribe<CentrifugeParametersChanged>(OnCentrifugeParametersChanged);
             eventAgent.Subscribe<CentrifugeRunningStatusChanged>(OnCentrifugeRunningStatusChanged);
         }
         
@@ -120,7 +123,17 @@ namespace RemoteLab.Machinery.Centrifuge
 
             IsSampleInside = message.IsRotorWithVialsInside;
         }
-        
+
+        private void OnCentrifugeParametersChanged(CentrifugeParametersChanged message)
+        {
+            if (!ReferenceEquals(transform, message.Sender))
+            {
+                return;
+            }
+
+            IsEnteringParameters = message.IsEnteringParameters;
+        }
+
         private void OnCentrifugeRunningStatusChanged(CentrifugeRunningStatusChanged message)
         {
             if (!ReferenceEquals(transform, message.Sender))

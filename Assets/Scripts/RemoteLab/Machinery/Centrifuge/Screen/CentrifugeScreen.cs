@@ -61,17 +61,15 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         {
             eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, true));
 
-            StartCoroutine(WaitForCentrifugationProcess());
+            Invoke("EndCentrifugeProcess", runningTime);
         }
         
         #endregion
 
         #region Private Methods
 
-        private IEnumerator WaitForCentrifugationProcess()
+        private void EndCentrifugeProcess()
         {
-            yield return new WaitForSeconds(runningTime);
-            
             eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, false));
         }
         
