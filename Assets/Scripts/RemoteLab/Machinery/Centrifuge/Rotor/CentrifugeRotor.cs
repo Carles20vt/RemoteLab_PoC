@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Photon.Pun;
 using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
@@ -7,7 +8,6 @@ using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using Zenject;
 
 namespace RemoteLab.Machinery.Centrifuge.Rotor
@@ -28,6 +28,8 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         private MeshRenderer meshRenderer;
 
         private List<Vial> vials;
+        
+        private PhotonView photonView;
 
         #endregion
         
@@ -60,6 +62,7 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
         private void Start()
         {
             vials = new List<Vial>();
+            photonView = GetComponent<PhotonView>() ?? GetComponentInParent<PhotonView>();
             
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
             meshRenderer = GetComponent<MeshRenderer>();
@@ -150,7 +153,14 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void CheckRotorCompartment()
         {
-            eventAgent.Publish(new CentrifugeRotorChanged(centrifugeParentTransform, vials.Count > 0));
+            //eventAgent.Publish(new CentrifugeRotorChanged(centrifugeParentTransform, vials.Count > 0));
+            photonView.RPC("PublishCentrifugeRotorChanged", RpcTarget.All, vials.Count > 0);
+        }
+        
+        [PunRPC]
+        private void PublishCentrifugeRotorChanged(bool rotorStatus)
+        {
+            eventAgent.Publish(new CentrifugeRotorChanged(centrifugeParentTransform, rotorStatus));
         }
 
         #endregion

@@ -46,6 +46,9 @@ MonoBehaviour:
   - SetPlayerMovementMagnitude
   - SetPlayerMovementVelocity
   - ReceiveAvatar
+  - PublishCentrifugeLidChanged
+  - PublishCentrifugeRotorChanged
+  - PublishCentrifugeRunningStatusChanged
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -1,5 +1,4 @@
 using System;
-using RemoteLab.Machinery.Centrifuge.Lid;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
 using RemoteLab.Machinery.Centrifuge.Screen.Messages;
@@ -7,7 +6,6 @@ using RemoteLab.Machinery.Centrifuge.States;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
-using UnityEngine;
 using Zenject;
 
 namespace RemoteLab.Machinery.Centrifuge

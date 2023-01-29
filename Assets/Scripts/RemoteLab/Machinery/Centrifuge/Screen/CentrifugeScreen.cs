@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Photon.Pun;
 using RemoteLab.Machinery.Centrifuge.Screen.Messages;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
@@ -19,6 +20,8 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         #region Private properties
 
         private Transform centrifugeParentTransform;
+        
+        private PhotonView photonView;
 
         #endregion
         
@@ -43,6 +46,7 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         private void Start()
         {
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
+            photonView = GetComponent<PhotonView>() ?? GetComponentInParent<PhotonView>();
         }
 
         /// <summary>
@@ -59,7 +63,8 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
 
         public void OnStartButtonPressed()
         {
-            eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, true));
+            //eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, true));
+            photonView.RPC("PublishCentrifugeRunningStatusChanged", RpcTarget.All, true);
 
             StartCoroutine(WaitForCentrifugationProcess());
         }
@@ -72,10 +77,16 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         {
             yield return new WaitForSeconds(runningTime);
             
-            eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, false));
+            //eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, false));
+            photonView.RPC("PublishCentrifugeRunningStatusChanged", RpcTarget.All, false);
+        }
+        
+        [PunRPC]
+        private void PublishCentrifugeRunningStatusChanged(bool centrifugeStatus)
+        {
+            eventAgent.Publish(new CentrifugeRunningStatusChanged(centrifugeParentTransform, centrifugeStatus));
         }
         
         #endregion
-        
     }
 }

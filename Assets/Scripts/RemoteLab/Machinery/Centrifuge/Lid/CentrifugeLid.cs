@@ -1,4 +1,4 @@
-using System.Collections;
+using Photon.Pun;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
@@ -31,6 +31,8 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
         private bool wasLidOpen;
 
+        private PhotonView photonView;
+
         #endregion
         
         #region Dependencies
@@ -57,6 +59,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
         private void Start()
         {
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
+            photonView = GetComponent<PhotonView>() ?? GetComponentInParent<PhotonView>();
             hingeJoint = GetComponent<HingeJoint>();
             myRigidbody = GetComponent<Rigidbody>();
 
@@ -105,6 +108,13 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
             lastLidOpenStatus = currentLidStatus;
 
+            //eventAgent.Publish(new CentrifugeLidChanged(centrifugeParentTransform, currentLidStatus));
+            photonView.RPC("PublishCentrifugeLidChanged", RpcTarget.All, currentLidStatus);
+        }
+
+        [PunRPC]
+        private void PublishCentrifugeLidChanged(bool currentLidStatus)
+        {
             eventAgent.Publish(new CentrifugeLidChanged(centrifugeParentTransform, currentLidStatus));
         }
         
