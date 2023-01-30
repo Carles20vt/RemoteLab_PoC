@@ -1,10 +1,6 @@
-using System.Collections.Generic;
-using RemoteLab.Machinery.Centrifuge.Lid;
-using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using Photon.Pun;
 using RemoteLab.Machinery.Centrifuge.Parameters.Messages;
-using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
 using RemoteLab.Machinery.Centrifuge.States;
-using RemoteLab.Supplies;
 using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
@@ -28,6 +24,8 @@ namespace RemoteLab.Machinery.Centrifuge.Parameters
         #region Private Properties
         
         private Transform centrifugeParentTransform;
+        
+        private PhotonView photonView;
 
         #endregion
         
@@ -60,7 +58,10 @@ namespace RemoteLab.Machinery.Centrifuge.Parameters
         private void Start()
         {
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
+            photonView = GetComponent<PhotonView>() ?? GetComponentInParent<PhotonView>();
+            
             parametersUI.SetActive(false);
+            
             EnableParameters(false);
         }
 
@@ -73,6 +74,7 @@ namespace RemoteLab.Machinery.Centrifuge.Parameters
         }
 
         #endregion
+        
         #region Events
 
         private void SubscribeToEvents()
@@ -94,11 +96,18 @@ namespace RemoteLab.Machinery.Centrifuge.Parameters
 
         public void OnParametersButtonPressed(bool parametersOpen)
         {
-            eventAgent.Publish(new CentrifugeParametersChanged(centrifugeParentTransform, parametersOpen));
+            photonView.RPC("PublishCentrifugeParametersChanged", RpcTarget.All, parametersOpen);
         }
 
         #endregion
+        
         #region Private Methods
+        
+        [PunRPC]
+        private void PublishCentrifugeParametersChanged(bool parametersOpen)
+        {
+            eventAgent.Publish(new CentrifugeParametersChanged(centrifugeParentTransform, parametersOpen));
+        }
 
         private void EnableParameters(bool enableParam)
         {
