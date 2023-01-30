@@ -153,7 +153,6 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void CheckRotorCompartment()
         {
-            //eventAgent.Publish(new CentrifugeRotorChanged(centrifugeParentTransform, vials.Count > 0));
             photonView.RPC("PublishCentrifugeRotorChanged", RpcTarget.All, vials.Count > 0);
         }
         

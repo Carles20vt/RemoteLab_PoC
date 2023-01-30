@@ -17,18 +17,13 @@ namespace RemoteLab.Machinery.Centrifuge.States
         {
             base.LogicUpdate();
 
-            if (!centrifuge.IsLidOpened && centrifuge.IsSampleInside)
+            if (!centrifuge.IsLidOpened)
             {
-                StateMachine.ChangeState(centrifuge.EnterParametersState);
-                return;
+                if (centrifuge.IsSampleInside)
+                    StateMachine.ChangeState(centrifuge.ClosedTopCoverState);
+                else
+                    StateMachine.ChangeState(centrifuge.IdleState);
             }
-
-            if (centrifuge.IsLidOpened || centrifuge.IsSampleInside)
-            {
-                return;
-            }
-            
-            StateMachine.ChangeState(centrifuge.IdleState);
         }
     }
 }

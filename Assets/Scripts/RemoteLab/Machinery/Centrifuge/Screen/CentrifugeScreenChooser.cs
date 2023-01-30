@@ -13,8 +13,8 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
     {
         #region Public Properties
 
-        [SerializeField] private GameObject idleScreenGameObject;
-        [SerializeField] private GameObject openTopCoverSamplesScreenGameObject;
+        [SerializeField] private GameObject openTopCoverScreenGameObject;
+        [SerializeField] private GameObject grabSamplesScreenGameObject;
         [SerializeField] private GameObject enterParametersScreenGameObject;
         [SerializeField] private GameObject runningStateScreenGameObject;
         [SerializeField] private GameObject removeSamplesScreenGameObject;
@@ -107,8 +107,8 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         
         private GameObject DetermineCurrentScreen(State newState)
         {
-            if (typeof(IdleState) == newState.GetType()) return idleScreenGameObject;
-            if (typeof(OpenTopCoverState) == newState.GetType()) return openTopCoverSamplesScreenGameObject;
+            if (typeof(IdleState) == newState.GetType()) return openTopCoverScreenGameObject;
+            if (typeof(OpenTopCoverState) == newState.GetType()) return grabSamplesScreenGameObject;
             if (typeof(EnterParametersState) == newState.GetType()) return enterParametersScreenGameObject;
             if (typeof(RunningState) == newState.GetType()) return runningStateScreenGameObject;
             return typeof(RemoveSamplesState) == newState.GetType() ? removeSamplesScreenGameObject : null;
