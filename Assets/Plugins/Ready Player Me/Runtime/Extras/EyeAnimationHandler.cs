@@ -100,12 +100,6 @@ namespace ReadyPlayerMe
 
         private void RotateEyes()
         {
-            if (leftEyeBone == null
-            || rightEyeBone == null)
-            {
-                return;
-            }
-            
             float vertical = Random.Range(-VERTICAL_MARGIN, VERTICAL_MARGIN);
             float horizontal = Random.Range(-HORIZONTAL_MARGIN, HORIZONTAL_MARGIN);
 

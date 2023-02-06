@@ -96,7 +96,7 @@ namespace RemoteLab.Machinery.Centrifuge.Parameters
 
         public void OnParametersButtonPressed(bool parametersOpen)
         {
-            photonView.RPC("PublishCentrifugeParametersChanged", RpcTarget.All, parametersOpen);
+            photonView.RPC(nameof(PublishCentrifugeParametersChanged), RpcTarget.All, parametersOpen);
         }
 
         #endregion

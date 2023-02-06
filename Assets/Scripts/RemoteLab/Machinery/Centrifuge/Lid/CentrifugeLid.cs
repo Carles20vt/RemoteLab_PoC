@@ -132,7 +132,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
             lastLidOpenStatus = currentLidStatus;
 
-            photonView.RPC("PublishCentrifugeLidChanged", RpcTarget.All, currentLidStatus);
+            photonView.RPC(nameof(PublishCentrifugeLidChanged), RpcTarget.All, currentLidStatus);
         }
 
         [PunRPC]

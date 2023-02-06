@@ -9,6 +9,8 @@ namespace ReadyPlayerMe
 
         [SerializeField] private WebView webView;
         [SerializeField] private GameObject loadingLabel;
+        [SerializeField] private GameObject warningLabel;
+        [SerializeField] private GameObject messageLabel;
         [SerializeField] private Button displayButton;
         [SerializeField] private Button closeButton;
 
@@ -16,16 +18,24 @@ namespace ReadyPlayerMe
          Tooltip("Uncheck if you don't want to continue editing the previous avatar, and make a completely new one.")]
         private bool keepBrowserSessionAlive = true;
 
-        private void Start()
+        private async void Start()
         {
             displayButton.onClick.AddListener(DisplayWebView);
             closeButton.onClick.AddListener(HideWebView);
+            
             if (webView == null)
             {
                 webView = FindObjectOfType<WebView>();
             }
 
             webView.KeepSessionAlive = keepBrowserSessionAlive;
+            
+            // Check if device can load RPM website, display warning id not
+            var available = await webView.IsWebViewUpToDate();
+            
+            messageLabel.SetActive(false);
+            warningLabel.SetActive(!available);
+            displayButton.gameObject.SetActive(available);
         }
 
         // Display WebView or create it if not initialized yet 
@@ -77,6 +87,7 @@ namespace ReadyPlayerMe
         private void Completed(object sender, CompletionEventArgs args)
         {
             avatar = args.Avatar;
+            AvatarAnimatorHelper.SetupAnimator(args.Metadata.BodyType, avatar);
             loadingLabel.SetActive(false);
             displayButton.gameObject.SetActive(true);
 

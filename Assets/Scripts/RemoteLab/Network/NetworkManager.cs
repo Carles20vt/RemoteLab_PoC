@@ -12,12 +12,13 @@ namespace RemoteLab.Network
 
         [SerializeField] private GameObject roomUI;
         [SerializeField] private List<DefaultRoom> defaultRooms;
-
+        
         #endregion
 
         #region Private Properties
 
         private bool isSceneLoading;
+        private bool isDebugModeEnabled;
 
         #endregion
         
@@ -29,60 +30,30 @@ namespace RemoteLab.Network
         }
         
         #endregion
-
-        public void ConnectToServer()
-        {
-            PhotonNetwork.ConnectUsingSettings();
-            Debug.Log("Try Connect To Server...");
-        }
-
+        
+        #region Events
+        
         public override void OnConnectedToMaster()
         {
             Debug.Log("Connected To Server.");
             base.OnConnectedToMaster();
             PhotonNetwork.JoinLobby();
         }
-
+        
         public override void OnJoinedLobby()
         {
             base.OnJoinedLobby();
             Debug.Log("We joined the lobby");
 
-            roomUI.SetActive(true);
-        }
-
-        public void InitializeRoom(int defaultRoomIndex)
-        {
-            if (isSceneLoading)
+            if (isDebugModeEnabled && !isSceneLoading)
             {
+                LoadDebugScene();
                 return;
             }
-            
-            var roomSettings = defaultRooms[defaultRoomIndex];
 
-            LoadScene(roomSettings);
-
-            JoinRoom(roomSettings);
+            roomUI.SetActive(true);
         }
-
-        private void LoadScene(DefaultRoom roomSettings)
-        {
-            isSceneLoading = true;
-            PhotonNetwork.LoadLevel(roomSettings.SceneIndex);
-        }
-
-        private static void JoinRoom(DefaultRoom roomSettings)
-        {
-            var roomOptions = new RoomOptions
-            {
-                MaxPlayers = (byte)roomSettings.MaxPlayer,
-                IsVisible = true,
-                IsOpen = true
-            };
-
-            PhotonNetwork.JoinOrCreateRoom(roomSettings.Name, roomOptions, TypedLobby.Default);
-        }
-
+        
         public override void OnJoinedRoom()
         {
             Debug.Log("Joined a Room");
@@ -97,16 +68,71 @@ namespace RemoteLab.Network
             base.OnPlayerEnteredRoom(newPlayer);
         }
 
-
         public override void OnDisable()
         {
             PhotonNetwork.Disconnect();
             base.OnDisable();
         }
+        
+        #endregion
 
+        #region Public Methods
+
+        public void ConnectToServer(bool isDebugScene)
+        {
+            isDebugModeEnabled = isDebugScene;
+            
+            PhotonNetwork.ConnectUsingSettings();
+            Debug.Log("Try Connect To Server...");
+        }
+        
+        public void InitializeRoom(int defaultRoomIndex)
+        {
+            if (isSceneLoading)
+            {
+                return;
+            }
+            
+            var roomSettings = defaultRooms[defaultRoomIndex];
+
+            LoadScene(roomSettings);
+
+            JoinRoom(roomSettings);
+        }
+        
         public void Dispose()
         {
             OnDisable();
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private void LoadScene(DefaultRoom roomSettings)
+        {
+            isSceneLoading = true;
+            PhotonNetwork.LoadLevel(roomSettings.SceneIndex);
+        }
+        
+        private void LoadDebugScene()
+        {
+            var debugScene = defaultRooms.Find(d => d.Name.Contains("Debug"));
+            JoinRoom(debugScene);
+        }
+
+        private static void JoinRoom(DefaultRoom roomSettings)
+        {
+            var roomOptions = new RoomOptions
+            {
+                MaxPlayers = (byte)roomSettings.MaxPlayer,
+                IsVisible = true,
+                IsOpen = true
+            };
+
+            PhotonNetwork.JoinOrCreateRoom(roomSettings.Name, roomOptions, TypedLobby.Default);
+        }
+
+        #endregion
     }
 }

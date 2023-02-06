@@ -1,21 +1,15 @@
 #if UNITY_ANDROID
 using UnityEngine;
-using UnityEngine.Android;
 
 public class AndroidWebViewWindow : WebViewWindowBase
 {
-    private const string WebViewAndroidPluginName = "io.wolf3d.webviewplugin.CWebViewPlugin";
+    private const string WebViewAndroidPluginName = "net.gree.unitywebview.CWebViewPlugin";
 
     private AndroidJavaObject webView;
     private AndroidJavaObject rectangle;
 
     public override void Init(WebViewOptions options)
     {
-        if (!Permission.HasUserAuthorizedPermission(Permission.Camera))
-        {
-            Permission.RequestUserPermission(Permission.Camera);
-        }
-
         webView = new AndroidJavaObject(WebViewAndroidPluginName);
         webView.Call("Init", name, options.Transparent, options.Zoom, (int) options.AndroidForceDarkMode, options.UA);
 
@@ -113,6 +107,10 @@ public class AndroidWebViewWindow : WebViewWindowBase
         webView.Call("EvaluateJS", js);
     }
 
+    public override bool IsWebViewAvailable()
+    {
+        return webView.CallStatic<bool>(nameof(IsWebViewAvailable));
+    }
 
     #region Navigation Methods
 

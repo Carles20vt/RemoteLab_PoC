@@ -1,5 +1,4 @@
 ﻿using TreeislandStudio.Engine;
-using UnityEngine.Serialization;
 
 namespace RemoteLab.Supplies
 {

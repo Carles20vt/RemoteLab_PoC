@@ -147,13 +147,15 @@ namespace RemoteLab.Machinery.Centrifuge.Rotor
 
         private void SetInteractable(bool lidOpen)
         {
-            foreach (Vial vial in vials)
+            foreach (var vial in vials)
+            {
                 vial.GetComponent<MeshCollider>().enabled = lidOpen;
+            }
         }
 
         private void CheckRotorCompartment()
         {
-            photonView.RPC("PublishCentrifugeRotorChanged", RpcTarget.All, vials.Count > 0);
+            photonView.RPC(nameof(PublishCentrifugeRotorChanged), RpcTarget.All, vials.Count > 0);
         }
         
         [PunRPC]

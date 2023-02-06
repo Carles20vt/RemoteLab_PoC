@@ -50,6 +50,8 @@ public abstract class WebViewWindowBase : MonoBehaviour
 
     public abstract void EvaluateJS(string js);
 
+    public abstract bool IsWebViewAvailable();
+
     public abstract int Progress { get; }
 
     #region Navigation Methods

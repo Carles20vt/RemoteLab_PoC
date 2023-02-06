@@ -1,4 +1,3 @@
-using System.Collections;
 using Photon.Pun;
 using RemoteLab.Machinery.Centrifuge.Screen.Messages;
 using TreeislandStudio.Engine;
@@ -63,9 +62,9 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
 
         public void OnStartButtonPressed()
         {
-            photonView.RPC("PublishCentrifugeRunningStatusChanged", RpcTarget.All, true);
+            photonView.RPC(nameof(PublishCentrifugeRunningStatusChanged), RpcTarget.All, true);
 
-            Invoke("EndCentrifugeProcess", runningTime);
+            Invoke(nameof(EndCentrifugeProcess), runningTime);
         }
         
         #endregion
@@ -74,7 +73,7 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
 
         private void EndCentrifugeProcess()
         {
-            photonView.RPC("PublishCentrifugeRunningStatusChanged", RpcTarget.All, false);
+            photonView.RPC(nameof(PublishCentrifugeRunningStatusChanged), RpcTarget.All, false);
         }
         
         [PunRPC]
