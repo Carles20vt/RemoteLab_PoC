@@ -15,7 +15,7 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         [SerializeField] [Range(0f, 10f)] private float runningTime = 3f;
 
         #endregion
-        
+
         #region Private properties
 
         private Transform centrifugeParentTransform;
@@ -45,7 +45,7 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         private void Start()
         {
             centrifugeParentTransform = GetComponentInParent<Centrifuge>().transform;
-            photonView = GetComponent<PhotonView>() ?? GetComponentInParent<PhotonView>();
+            photonView = GetComponent<PhotonView>();
         }
 
         /// <summary>
