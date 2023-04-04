@@ -1643,8 +1643,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2461901938680643388, guid: 1159074e450add644ac8e50c7fe1e5bd,
         type: 3}
-      propertyPath: m_Colliders.Array.size
-      value: 1
+      propertyPath: m_InteractionManager
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2461901938680643388, guid: 1159074e450add644ac8e50c7fe1e5bd,
         type: 3}
