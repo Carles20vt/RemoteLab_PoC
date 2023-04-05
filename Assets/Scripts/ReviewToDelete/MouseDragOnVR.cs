@@ -1,18 +1,21 @@
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-namespace RemoteLab.Characters
+namespace ReviewToDelete
 {
+    [RequireComponent(typeof(PhotonView), typeof(Rigidbody))]
     public class MouseDragOnVR : MonoBehaviour
     {
         #region Private Properties
         
         private PhotonView photonView;
-        private XRGrabNetworkInteractable xrGrabNetworkInteractable;
+        private XRSocketInteractor otherXRSocketInteractor;
         private float distance;
         private bool isDragging;
         private Camera mainCamera;
         private bool isMainCameraNull;
+        private new Rigidbody rigidbody;
 
         #endregion
 
@@ -21,7 +24,7 @@ namespace RemoteLab.Characters
         private void Start()
         {
             photonView = GetComponent<PhotonView>();
-            xrGrabNetworkInteractable = GetComponent<XRGrabNetworkInteractable>();
+            rigidbody = GetComponent<Rigidbody>();
             
             mainCamera = Camera.main;
 
@@ -36,38 +39,98 @@ namespace RemoteLab.Characters
         #endregion
         
         #region Events
-        
+
         private void OnMouseDown()
         {
-            return;
-            /*
-            if (xrGrabNetworkInteractable.IsDragging)
-            {
-                //return;
-                
-                xrGrabNetworkInteractable.ForceDrop();
-            }
+            photonView.RequestOwnership();
+            photonView.RPC(nameof(DisableXrSocketInteractorForMouse), RpcTarget.All);
             
             isDragging = true;
-            
-            photonView.RequestOwnership();
-            //xrGrabNetworkInteractable.enabled = false;
-            
             distance = Vector3.Distance(transform.position, mainCamera.transform.position);
-            */
         }
         
         private void OnMouseUp()
         {
-            return;
+            photonView.TransferOwnership(0);
+            photonView.RPC(nameof(EnableXrSocketInteractorForMouse), RpcTarget.All);
             
             isDragging = false;
-            //xrGrabNetworkInteractable.enabled = true;
+        }
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            SetXRSocketInteractor(collision.collider);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            SetXRSocketInteractor(other);
+        }
+
+        private void SetXRSocketInteractor(Component component)
+        {
+            var newXRSocketInteractor = component.GetComponent<XRSocketInteractor>();
+            
+            if (newXRSocketInteractor == null)
+            {
+                return;
+            }
+            
+            if (otherXRSocketInteractor != null)
+            {
+                otherXRSocketInteractor.socketActive = true;
+            }
+                
+            otherXRSocketInteractor = newXRSocketInteractor;
         }
 
         #endregion
         
         #region Private Methods
+        
+        [PunRPC]
+        private void EnableXrSocketInteractorForMouse()
+        {
+            if (otherXRSocketInteractor == null ||
+                photonView.IsMine)
+            {
+                return;
+            }
+            
+            otherXRSocketInteractor.socketActive = true;
+                
+            Debug.Log($"Player {photonView.name} is enabling " +
+                      $"socket interactor {otherXRSocketInteractor.name} for the " +
+                      $"GameObject {otherXRSocketInteractor.gameObject.name}");
+            
+            rigidbody.isKinematic = true;
+                
+            Debug.Log($"Player {photonView.name} is enabling the Kinematic " +
+                      $"for the GameObject {rigidbody.gameObject.name}. The current " +
+                      $"owner is {photonView.Owner}");
+        }
+        
+        [PunRPC]
+        private void DisableXrSocketInteractorForMouse()
+        {
+            if (otherXRSocketInteractor == null ||
+                photonView.IsMine)
+            {
+                return;
+            }
+            
+            otherXRSocketInteractor.socketActive = false;
+            
+            Debug.Log($"Player {photonView.name} is disabling " +
+                      $"socket interactor {otherXRSocketInteractor.name} for the " +
+                      $"GameObject {otherXRSocketInteractor.gameObject.name}");
+            
+            rigidbody.isKinematic = false;
+                
+            Debug.Log($"Player {photonView.name} is disabling the Kinematic " +
+                      $"for the GameObject {rigidbody.gameObject.name}. The current " +
+                      $"owner is {photonView.Owner}");
+        }
 
         private void MouseDraggingMovement()
         {

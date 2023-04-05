@@ -10,7 +10,9 @@ namespace RemoteLab.Characters
         #region Private Properties
 
         private PhotonView photonView;
-
+        private XRSocketInteractor otherXRSocketInteractor;
+        private new Rigidbody rigidbody;
+        
         #endregion
 
         #region Unity CallBacks
@@ -18,18 +20,104 @@ namespace RemoteLab.Characters
         private void Start()
         {
             photonView = GetComponent<PhotonView>();
+            rigidbody = GetComponent<Rigidbody>();
         }
 
         #endregion
 
-        #region Private Methods
+        #region Events
 
         protected override void OnSelectEntering(SelectEnterEventArgs args)
         {
             photonView.RequestOwnership();
+            photonView.RPC(nameof(DisableXrSocketInteractor), RpcTarget.All);
+
             base.OnSelectEntering(args);
         }
+        
+        protected override void OnSelectExiting(SelectExitEventArgs args)
+        {
+            photonView.TransferOwnership(0);
+            photonView.RPC(nameof(EnableXrSocketInteractor), RpcTarget.All);
 
+            base.OnSelectExiting(args);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            SetXRSocketInteractor(collision.collider);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            SetXRSocketInteractor(other);
+        }
+
+        private void SetXRSocketInteractor(Component component)
+        {
+            var newXRSocketInteractor = component.GetComponent<XRSocketInteractor>();
+            
+            if (newXRSocketInteractor == null)
+            {
+                return;
+            }
+            
+            if (otherXRSocketInteractor != null)
+            {
+                otherXRSocketInteractor.socketActive = true;
+            }
+                
+            otherXRSocketInteractor = newXRSocketInteractor;
+        }
+
+        #endregion
+        
+        #region Private Methods
+        
+        [PunRPC]
+        private void EnableXrSocketInteractor()
+        {
+            if (otherXRSocketInteractor == null ||
+                photonView.IsMine)
+            {
+                return;
+            }
+            
+            otherXRSocketInteractor.socketActive = true;
+            
+            Debug.Log($"Player {photonView.name} is enabling " +
+                      $"socket interactor {otherXRSocketInteractor.name} for the " +
+                      $"GameObject {otherXRSocketInteractor.gameObject.name}");
+            
+            rigidbody.isKinematic = true;
+                
+            Debug.Log($"Player {photonView.name} is enabling the Kinematic " +
+                      $"for the GameObject {rigidbody.gameObject.name}. The current " +
+                      $"owner is {photonView.Owner}");
+        }
+        
+        [PunRPC]
+        private void DisableXrSocketInteractor()
+        {
+            if (otherXRSocketInteractor == null ||
+                photonView.IsMine)
+            {
+                return;
+            }
+            
+            otherXRSocketInteractor.socketActive = false;
+            
+            Debug.Log($"Player {photonView.name} is disabling " +
+                      $"socket interactor {otherXRSocketInteractor.name} for the " +
+                      $"GameObject {otherXRSocketInteractor.gameObject.name}");
+            
+            rigidbody.isKinematic = false;
+                
+            Debug.Log($"Player {photonView.name} is disabling the Kinematic " +
+                      $"for the GameObject {rigidbody.gameObject.name}. The current " +
+                      $"owner is {photonView.Owner}");
+        }
+        
         #endregion
     }
 }
