@@ -61,7 +61,7 @@ namespace RemoteLab.Characters
         
         private void OnStateMachineChanged(StateMachineChanged message)
         {
-            ChangeRayHandsVisibility(typeof(EnterParametersState) == message.NewState.GetType());
+            ChangeRayHandsVisibility(typeof(EnteringParametersState) == message.NewState.GetType());
         }
 
         #endregion

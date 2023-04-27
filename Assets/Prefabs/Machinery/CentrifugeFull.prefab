@@ -89,7 +89,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 1
   m_DistanceCalculationMode: 1
   m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
@@ -2153,7 +2153,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 2048
   m_AttachTransform: {fileID: 5460831126449895828}
   m_KeepSelectedTargetValid: 1
   m_DisableVisualsWhenBlockedInGroup: 1
@@ -2356,6 +2356,18 @@ MonoBehaviour:
       - m_Target: {fileID: 5769720035042953024}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1033966184}
+        m_TargetAssemblyTypeName: UnityEngine.Renderer, UnityEngine
+        m_MethodName: set_enabled
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4991,6 +5003,7 @@ GameObject:
   - component: {fileID: 8208036235491385093}
   - component: {fileID: 2225437075167167220}
   - component: {fileID: 1465460269}
+  - component: {fileID: 3554833276431631469}
   m_Layer: 0
   m_Name: CentrifugeConfig
   m_TagString: Untagged
@@ -5112,7 +5125,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1abf277c8054d5cb0fa8c786f76fe01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runningTime: 10
+  runningTime: 3
+--- !u!114 &3554833276431631469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5769720035042953024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &6120732154884876536
 GameObject:
   m_ObjectHideFlags: 0
@@ -6519,6 +6554,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 609960344835878094, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.22
+      objectReference: {fileID: 0}
+    - target: {fileID: 609960344835878094, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
+        type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
@@ -6550,7 +6590,7 @@ PrefabInstance:
     - target: {fileID: 711698151034006968, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.05
       objectReference: {fileID: 0}
     - target: {fileID: 711698151034006968, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
@@ -6560,7 +6600,7 @@ PrefabInstance:
     - target: {fileID: 711698151034006968, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.127
       objectReference: {fileID: 0}
     - target: {fileID: 711698151034006968, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
@@ -6607,6 +6647,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1481825301625586876, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -0.0004891865
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481825301625586876, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: 0.2590001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1481825301625586876, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.22950006
+      objectReference: {fileID: 0}
     - target: {fileID: 1634788760772022254, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
       propertyPath: m_TrackRotation
@@ -6645,7 +6700,7 @@ PrefabInstance:
     - target: {fileID: 1634788760772022254, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
       propertyPath: m_InteractionLayers.m_Bits
-      value: 4
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 1634788760772022254, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}
@@ -6986,6 +7041,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneViewId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634788760772022256, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
+        type: 3}
+      propertyPath: OwnershipTransfer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3402242349161390582, guid: c60d9b381f7f74d49bf6b43dd4744b8c,
         type: 3}

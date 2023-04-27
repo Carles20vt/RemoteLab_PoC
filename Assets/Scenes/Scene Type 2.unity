@@ -2820,15 +2820,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: CentrifugeComplete
       objectReference: {fileID: 0}
-    - target: {fileID: 5891174974838522643, guid: f96c51b8d47194bbc874f7568e171885,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6195198045979837302, guid: f96c51b8d47194bbc874f7568e171885,
         type: 3}
       propertyPath: sceneViewId
       value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959440670024586522, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 6997077497070979974, guid: f96c51b8d47194bbc874f7568e171885,
         type: 3}
@@ -2850,11 +2850,6 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 22
       objectReference: {fileID: 0}
-    - target: {fileID: 8352988365316779595, guid: f96c51b8d47194bbc874f7568e171885,
-        type: 3}
-      propertyPath: m_InteractionManager
-      value: 
-      objectReference: {fileID: 258803220}
     - target: {fileID: 8352988365316779605, guid: f96c51b8d47194bbc874f7568e171885,
         type: 3}
       propertyPath: sceneViewId
@@ -4352,11 +4347,47 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 597751784, guid: 5f4a511adf9426b439b966fa91e2a4df, type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Id
+      value: 257b0075-e485-4861-a272-f3f694e147a2
+      objectReference: {fileID: 0}
+    - target: {fileID: 597751784, guid: 5f4a511adf9426b439b966fa91e2a4df, type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Name
+      value: Directional Anchor Rotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 613195528, guid: 5f4a511adf9426b439b966fa91e2a4df, type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Id
+      value: f10429d6-6d3f-419c-b81b-24332d4fc46a
+      objectReference: {fileID: 0}
+    - target: {fileID: 613195528, guid: 5f4a511adf9426b439b966fa91e2a4df, type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Name
+      value: Directional Anchor Rotation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1105588222782737538, guid: 5f4a511adf9426b439b966fa91e2a4df,
+        type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Id
+      value: 24019507-562c-4765-8efc-d1afdbfd26cb
+      objectReference: {fileID: 0}
+    - target: {fileID: 1105588222782737538, guid: 5f4a511adf9426b439b966fa91e2a4df,
+        type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Name
+      value: Directional Anchor Rotation
+      objectReference: {fileID: 0}
     - target: {fileID: 1105588222782737541, guid: 5f4a511adf9426b439b966fa91e2a4df,
         type: 3}
       propertyPath: m_InteractionManager
       value: 
       objectReference: {fileID: 258803220}
+    - target: {fileID: 1105588222873535370, guid: 5f4a511adf9426b439b966fa91e2a4df,
+        type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Id
+      value: 50369768-ff15-463c-9cb5-f75681ac5c96
+      objectReference: {fileID: 0}
+    - target: {fileID: 1105588222873535370, guid: 5f4a511adf9426b439b966fa91e2a4df,
+        type: 3}
+      propertyPath: m_DirectionalAnchorRotationAction.m_Action.m_Name
+      value: Directional Anchor Rotation
+      objectReference: {fileID: 0}
     - target: {fileID: 1105588222873535373, guid: 5f4a511adf9426b439b966fa91e2a4df,
         type: 3}
       propertyPath: m_InteractionManager
@@ -4574,6 +4605,11 @@ PrefabInstance:
         type: 3}
       propertyPath: sceneViewId
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3554833276431631469, guid: 1159074e450add644ac8e50c7fe1e5bd,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 4117260803746924986, guid: 1159074e450add644ac8e50c7fe1e5bd,
         type: 3}

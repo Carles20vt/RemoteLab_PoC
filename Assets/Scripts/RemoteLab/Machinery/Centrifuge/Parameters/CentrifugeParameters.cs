@@ -87,7 +87,7 @@ namespace RemoteLab.Machinery.Centrifuge.Parameters
             if (!ReferenceEquals(centrifugeParentTransform, message.Sender))
                 return;
 
-            EnableParameters(typeof(ClosedTopCoverState) == message.NewState.GetType());
+            EnableParameters(typeof(ReadyToEnterParametersState) == message.NewState.GetType());
         }
         
         #endregion

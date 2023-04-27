@@ -19,7 +19,8 @@ namespace RemoteLab.Machinery.Centrifuge
         
         
         ClosedTopCoverState ClosedTopCoverState { get; }
-        EnterParametersState EnterParametersState { get; }
+        ReadyToEnterParametersState ReadyToEnterParametersState { get; }
+        EnteringParametersState EnteringParametersState { get; }
         OpenTopCoverState OpenTopCoverState { get; }
         RemoveSamplesState RemoveSamplesState { get; }
         RunningState RunningState { get; }

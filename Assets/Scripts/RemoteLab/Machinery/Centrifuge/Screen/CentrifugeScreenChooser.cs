@@ -109,7 +109,7 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         {
             if (typeof(IdleState) == newState.GetType()) return openTopCoverScreenGameObject;
             if (typeof(OpenTopCoverState) == newState.GetType()) return grabSamplesScreenGameObject;
-            if (typeof(EnterParametersState) == newState.GetType()) return enterParametersScreenGameObject;
+            if (typeof(ReadyToEnterParametersState) == newState.GetType()) return enterParametersScreenGameObject;
             if (typeof(RunningState) == newState.GetType()) return runningStateScreenGameObject;
             return typeof(RemoveSamplesState) == newState.GetType() ? removeSamplesScreenGameObject : null;
         }

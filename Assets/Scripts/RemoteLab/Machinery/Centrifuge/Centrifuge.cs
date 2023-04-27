@@ -22,7 +22,8 @@ namespace RemoteLab.Machinery.Centrifuge
 
         public IdleState IdleState { get; private set; }
         public ClosedTopCoverState ClosedTopCoverState { get; private set; }
-        public EnterParametersState EnterParametersState { get; private set; }
+        public ReadyToEnterParametersState ReadyToEnterParametersState { get; private set; }
+        public EnteringParametersState EnteringParametersState { get; private set; }
         public OpenTopCoverState OpenTopCoverState { get; private set; }
         public RemoveSamplesState RemoveSamplesState { get; private set; }
         public RunningState RunningState { get; private set; }
@@ -172,7 +173,8 @@ namespace RemoteLab.Machinery.Centrifuge
             
             IdleState = new IdleState(this, instrumentStateMachine);
             ClosedTopCoverState = new ClosedTopCoverState(this, instrumentStateMachine);
-            EnterParametersState = new EnterParametersState(this, instrumentStateMachine);
+            ReadyToEnterParametersState = new ReadyToEnterParametersState(this, instrumentStateMachine);
+            EnteringParametersState = new EnteringParametersState(this, instrumentStateMachine);
             OpenTopCoverState = new OpenTopCoverState(this, instrumentStateMachine);
             RemoveSamplesState = new RemoveSamplesState(this, instrumentStateMachine);
             RunningState = new RunningState(this, instrumentStateMachine);

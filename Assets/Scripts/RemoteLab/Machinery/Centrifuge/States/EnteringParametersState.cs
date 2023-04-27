@@ -3,13 +3,13 @@ using TreeislandStudio.Engine.StateMachine;
 
 namespace RemoteLab.Machinery.Centrifuge.States
 {
-    public class EnterParametersState : State
+    public class EnteringParametersState : State
     {
         private readonly ICentrifuge centrifuge;
         
-        public EnterParametersState(IMachinery instrument, StateMachine stateMachine) : base(instrument, stateMachine)
+        public EnteringParametersState(IMachinery instrument, StateMachine stateMachine) : base(instrument, stateMachine)
         {
-            StateName = "EnterParametersState";
+            StateName = "EnteringParametersState";
             centrifuge = (ICentrifuge) instrument;
         }
 
@@ -20,13 +20,13 @@ namespace RemoteLab.Machinery.Centrifuge.States
             if (centrifuge.IsEnteringParameters)
                 return;
 
-            if (!centrifuge.IsParametersEntered)
+            if (centrifuge.IsParametersEntered)
             {
-                StateMachine.ChangeState(centrifuge.ClosedTopCoverState);
+                StateMachine.ChangeState(centrifuge.RunningState);
                 return;
             }
             
-            StateMachine.ChangeState(centrifuge.RunningState);
+            StateMachine.ChangeState(centrifuge.ReadyToEnterParametersState);
         }
     }
 }

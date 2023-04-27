@@ -3,13 +3,13 @@ using TreeislandStudio.Engine.StateMachine;
 
 namespace RemoteLab.Machinery.Centrifuge.States
 {
-    public class ClosedTopCoverState : State
+    public class ReadyToEnterParametersState : State
     {
         private readonly ICentrifuge centrifuge;
 
-        public ClosedTopCoverState(IMachinery instrument, StateMachine stateMachine) : base(instrument, stateMachine)
+        public ReadyToEnterParametersState(IMachinery instrument, StateMachine stateMachine) : base(instrument, stateMachine)
         {
-            StateName = "ClosedTopCoverState";
+            StateName = "ReadyToEnterParametersState";
             centrifuge = (ICentrifuge) instrument;
         }
 
@@ -22,14 +22,9 @@ namespace RemoteLab.Machinery.Centrifuge.States
                 StateMachine.ChangeState(centrifuge.OpenTopCoverState);
                 return;
             }
-            if (centrifuge.IsSampleInside)
+            if (centrifuge.IsEnteringParameters)
             {
-                StateMachine.ChangeState(centrifuge.ReadyToEnterParametersState);
-                return;
-            }
-            if (centrifuge.IsParametersEntered)
-            {
-                StateMachine.ChangeState(centrifuge.RunningState);
+                StateMachine.ChangeState(centrifuge.EnteringParametersState);
                 return;
             }
         }

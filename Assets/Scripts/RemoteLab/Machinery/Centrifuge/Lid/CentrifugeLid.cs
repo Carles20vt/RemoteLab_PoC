@@ -105,7 +105,7 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
             if (!ReferenceEquals(centrifugeParentTransform, message.Sender))
                 return;
 
-            if (typeof(RunningState) == message.NewState.GetType())
+            if (typeof(RunningState) == message.NewState.GetType() || typeof(EnteringParametersState) == message.NewState.GetType())
                 lidInteractable.enabled = false;
             else if (!lidInteractable.enabled)
                 lidInteractable.enabled = true;
