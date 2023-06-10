@@ -3,7 +3,6 @@ using TreeislandStudio.Engine.Event;
 namespace TreeislandStudio.Engine.Environment {
     public class EnvironmentSetUp : IEnvironmentSetUp
     {
-        
         #region Public properties
         
         /// <inheritdoc />
@@ -18,6 +17,11 @@ namespace TreeislandStudio.Engine.Environment {
         /// </summary>
         public IEventBroker EventBroker { get; }
 
+        /// <summary>
+        /// The game configuration
+        /// </summary>
+        public IGameConfiguration GameConfiguration { get; }
+
         #endregion
 
         /// <summary>
@@ -25,10 +29,15 @@ namespace TreeislandStudio.Engine.Environment {
         /// </summary>
         /// <param name="timeProvider"></param>
         /// <param name="eventBroker"></param>
-        public EnvironmentSetUp(ITimeProvider timeProvider, IEventBroker eventBroker)
+        /// <param name="gameConfiguration"></param>
+        public EnvironmentSetUp(
+            ITimeProvider timeProvider,
+            IEventBroker eventBroker,
+            IGameConfiguration gameConfiguration)
         {
             TimeProvider = timeProvider;
             EventBroker  = eventBroker;
+            GameConfiguration = gameConfiguration;
         }
     }
 }

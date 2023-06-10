@@ -1,6 +1,8 @@
 using Photon.Pun;
+using TreeislandStudio.Engine.Environment;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using Zenject;
 
 namespace RemoteLab.Characters
 {
@@ -14,6 +16,25 @@ namespace RemoteLab.Characters
         private new Rigidbody rigidbody;
         
         #endregion
+        
+        #region Dependencies
+        
+        /// <summary>
+        /// Determines if PUN is enabled or not.
+        /// </summary>
+        private bool isPunEnabled;
+
+        /// <summary>
+        /// Dependency injection
+        /// </summary>
+        /// <param name="environmentSetUp"></param>
+        [Inject]
+        private void Initialize(IEnvironmentSetUp environmentSetUp)
+        {
+            isPunEnabled = environmentSetUp.GameConfiguration.IsMultiPlayerEnabled;
+        }
+
+        #endregion
 
         #region Unity CallBacks
 
@@ -21,6 +42,8 @@ namespace RemoteLab.Characters
         {
             photonView = GetComponent<PhotonView>();
             rigidbody = GetComponent<Rigidbody>();
+
+            PhotonNetwork.OfflineMode = !isPunEnabled;
         }
 
         #endregion
@@ -29,17 +52,31 @@ namespace RemoteLab.Characters
 
         protected override void OnSelectEntering(SelectEnterEventArgs args)
         {
-            photonView.RequestOwnership();
-            photonView.RPC(nameof(DisableXrSocketInteractor), RpcTarget.All);
+            if (isPunEnabled)
+            {
+                photonView.RequestOwnership();
+                photonView.RPC(nameof(DisableXrSocketInteractor), RpcTarget.All);
+            }
+            else
+            {
+                DisableXrSocketInteractor();
+            }
 
             base.OnSelectEntering(args);
         }
         
         protected override void OnSelectExiting(SelectExitEventArgs args)
         {
-            photonView.TransferOwnership(0);
-            photonView.RPC(nameof(EnableXrSocketInteractor), RpcTarget.All);
-
+            if (isPunEnabled)
+            {
+                photonView.TransferOwnership(0);
+                photonView.RPC(nameof(EnableXrSocketInteractor), RpcTarget.All);
+            }
+            else
+            {
+                EnableXrSocketInteractor();
+            }
+            
             base.OnSelectExiting(args);
         }
 

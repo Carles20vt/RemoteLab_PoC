@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Realtime;
+using TreeislandStudio.Engine.Environment;
 using UnityEngine;
+using Zenject;
 
 namespace RemoteLab.Network
 {
@@ -22,11 +24,35 @@ namespace RemoteLab.Network
 
         #endregion
         
+        #region Dependencies
+        
+        /// <summary>
+        /// Determines if PUN is enabled or not.
+        /// </summary>
+        private bool isPunEnabled;
+
+        /// <summary>
+        /// Dependency injection
+        /// </summary>
+        /// <param name="environmentSetUp"></param>
+        [Inject]
+        private void Initialize(IEnvironmentSetUp environmentSetUp)
+        {
+            isPunEnabled = environmentSetUp.GameConfiguration.IsMultiPlayerEnabled;
+        }
+
+        #endregion
+        
         #region MonoBehaviour Callbacks
         
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
+        }
+        
+        private void Start()
+        {
+            PhotonNetwork.OfflineMode = !isPunEnabled;
         }
         
         #endregion
@@ -35,8 +61,16 @@ namespace RemoteLab.Network
         
         public override void OnConnectedToMaster()
         {
-            Debug.Log("Connected To Server.");
             base.OnConnectedToMaster();
+            
+            Debug.Log("Connected To Server.");
+
+            if (!isPunEnabled)
+            {
+                ShowUI();
+                return;
+            }
+
             PhotonNetwork.JoinLobby();
         }
         
@@ -51,15 +85,13 @@ namespace RemoteLab.Network
                 return;
             }
 
-            roomUI.SetActive(true);
+            ShowUI();
         }
-        
+
         public override void OnJoinedRoom()
         {
             Debug.Log("Joined a Room");
             base.OnJoinedRoom();
-
-            isSceneLoading = false;
         }
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
@@ -70,7 +102,11 @@ namespace RemoteLab.Network
 
         public override void OnDisable()
         {
-            PhotonNetwork.Disconnect();
+            if (photonView != null)
+            {
+                PhotonNetwork.Disconnect();
+            }
+
             base.OnDisable();
         }
         
@@ -82,8 +118,9 @@ namespace RemoteLab.Network
         {
             isDebugModeEnabled = isDebugScene;
             
-            PhotonNetwork.ConnectUsingSettings();
             Debug.Log("Try Connect To Server...");
+
+            PhotonNetwork.ConnectUsingSettings();
         }
         
         public void InitializeRoom(int defaultRoomIndex)
@@ -93,10 +130,11 @@ namespace RemoteLab.Network
                 return;
             }
             
-            var roomSettings = defaultRooms[defaultRoomIndex];
+            isSceneLoading = true;
+            
+            var roomSettings = defaultRooms.Find(room => room.SceneIndex == defaultRoomIndex);
 
             LoadScene(roomSettings);
-
             JoinRoom(roomSettings);
         }
         
@@ -108,10 +146,19 @@ namespace RemoteLab.Network
         #endregion
 
         #region Private Methods
+        
+        private void ShowUI()
+        {
+            if (roomUI == null)
+            {
+                return;
+            }
+            
+            roomUI.SetActive(true);
+        }
 
         private void LoadScene(DefaultRoom roomSettings)
         {
-            isSceneLoading = true;
             PhotonNetwork.LoadLevel(roomSettings.SceneIndex);
         }
         
@@ -130,6 +177,7 @@ namespace RemoteLab.Network
                 IsOpen = true
             };
 
+            PhotonNetwork.LeaveRoom();
             PhotonNetwork.JoinOrCreateRoom(roomSettings.Name, roomOptions, TypedLobby.Default);
         }
 

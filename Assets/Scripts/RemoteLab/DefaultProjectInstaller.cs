@@ -11,13 +11,10 @@ namespace RemoteLab
     public class DefaultProjectInstaller : MonoInstaller<DefaultProjectInstaller>
     {
         #region Public properties
-        /*
-        public PlayerInputController playerInputController;
-
-        public EnemyInputController enemyInputController;
-
-        public PlayerCharacter playerCharacter;
-        */
+        
+        [SerializeField]
+        private bool enableMultiPlayer;
+        
         #endregion
 
         #region Private properties
@@ -26,7 +23,7 @@ namespace RemoteLab
         /// The project level event broker, it survives between scenes, typically would be added to the container
         /// be the <c>ProjectInstaller</c>
         /// </summary>
-        private IEventBroker _eventBroker;
+        private IEventBroker eventBroker;
         
         #endregion
         
@@ -46,8 +43,9 @@ namespace RemoteLab
         /// </summary>
         private void BindKernelServices()
         {
-            // Time provider
             var globalTimeProvider = (ITimeProvider) new TimeProvider(() => Time.time);
+            var gameConfiguration = (IGameConfiguration) new GameConfiguration(enableMultiPlayer);
+            
             Container
                 .BindInstance(globalTimeProvider)
                 .AsCached();
@@ -71,20 +69,26 @@ namespace RemoteLab
                 .AsSingle();
             
             // Event Broker
-            _eventBroker = (IEventBroker) new EventBroker(customLogger);
+            eventBroker = (IEventBroker) new EventBroker(customLogger);
             Container
-                .BindInstance(_eventBroker)
+                .BindInstance(eventBroker)
                 .AsSingle()
                 .NonLazy();
             
             // Environment global
             Container
-                .BindInstance((IEnvironmentSetUp) new EnvironmentSetUp(globalTimeProvider, _eventBroker))
+                .BindInstance((IEnvironmentSetUp) new EnvironmentSetUp(
+                    globalTimeProvider, 
+                    eventBroker,
+                    gameConfiguration))
                 .AsCached();
             
             // Environment for enemies
             Container
-                .BindInstance((IEnvironmentSetUp) new EnvironmentSetUp(enemyTimeProvider, _eventBroker))
+                .BindInstance((IEnvironmentSetUp) new EnvironmentSetUp(
+                    enemyTimeProvider, 
+                    eventBroker,
+                    gameConfiguration))
                 .WithId(ServiceIds.EnemyEnvironment)
                 .AsCached();
             /*

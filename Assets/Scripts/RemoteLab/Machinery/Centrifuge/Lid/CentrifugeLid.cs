@@ -76,11 +76,10 @@ namespace RemoteLab.Machinery.Centrifuge.Lid
 
         private void FixedUpdate()
         {
-            if(wasLidOpen != IsLidOpened())
-            {
-                OnLidStatusChanged();
-                wasLidOpen = !wasLidOpen;
-            }
+            if (wasLidOpen == IsLidOpened()) return;
+            
+            OnLidStatusChanged();
+            wasLidOpen = !wasLidOpen;
         }
 
         /// <summary>

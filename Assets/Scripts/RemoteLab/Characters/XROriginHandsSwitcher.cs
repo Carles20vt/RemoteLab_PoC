@@ -1,4 +1,5 @@
 using RemoteLab.Machinery.Centrifuge.States;
+using TreeislandStudio.Engine;
 using TreeislandStudio.Engine.Environment;
 using TreeislandStudio.Engine.Event;
 using TreeislandStudio.Engine.StateMachine.Messages;
@@ -7,7 +8,7 @@ using Zenject;
 
 namespace RemoteLab.Characters
 {
-    public class XROriginHandsSwitcher : MonoBehaviour
+    public class XROriginHandsSwitcher : TreeislandBehaviour
     {
         #region Public Properties
 
