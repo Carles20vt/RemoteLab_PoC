@@ -1948,6 +1948,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2291526554170756455, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3630797039733507488, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 4384668096185402250, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5108795427951753779, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 5507693584366806188, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 5891174974197260926, guid: f96c51b8d47194bbc874f7568e171885,
         type: 3}
       propertyPath: m_RootOrder
@@ -2007,6 +2032,41 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: CentrifugeComplete
+      objectReference: {fileID: 0}
+    - target: {fileID: 6195198045979837302, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 6959440670024586522, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6997077497070979974, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7101189921361404654, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7557843430243784909, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8239996410373807087, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 8352988365316779605, guid: f96c51b8d47194bbc874f7568e171885,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f96c51b8d47194bbc874f7568e171885, type: 3}

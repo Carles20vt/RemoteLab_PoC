@@ -2494,6 +2494,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bootstrap
       objectReference: {fileID: 0}
+    - target: {fileID: 4823379733479920382, guid: 788b1116011ce4ff090b29453b814d5d,
+        type: 3}
+      propertyPath: enableMultiPlayer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 788b1116011ce4ff090b29453b814d5d, type: 3}
 --- !u!1001 &2001407530
