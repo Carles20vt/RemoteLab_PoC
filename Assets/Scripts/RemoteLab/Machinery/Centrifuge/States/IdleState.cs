@@ -17,7 +17,8 @@ namespace RemoteLab.Machinery.Centrifuge.States
         {
             base.LogicUpdate();
 
-            if (!centrifuge.IsLidOpened)
+            if (!centrifuge.IsLidOpened ||
+                !centrifuge.IsStarted)
             {
                 return;
             }
