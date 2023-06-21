@@ -117,7 +117,6 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
 
         private void ConfigureAudio()
         {
-            audioSource.clip = finishedActionAudioClip;
             audioSource.playOnAwake = false;
         }
 
@@ -160,19 +159,26 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
             yield return new WaitForSeconds(
                 finishedActionAudioClip.length +
                 delayBetweenScreenChanges);
-            
-            yield return new WaitForSeconds(
-                attentionAudioClip.length +
-                delayBetweenScreenChanges);
 
-            if (screenToShow != null)
+            if (screenToShow == null)
             {
-                screenToShow.SetActive(true);
+                yield break;
             }
+
+            PlayAttention();
+            yield return new WaitForSeconds(attentionAudioClip.length);
+
+            screenToShow.SetActive(true);
         }
 
         private void PlayFinishedAction()
         {
+            audioSource.clip = finishedActionAudioClip;
+            audioSource.Play();
+        }
+        private void PlayAttention()
+        {
+            audioSource.clip = attentionAudioClip;
             audioSource.Play();
         }
 

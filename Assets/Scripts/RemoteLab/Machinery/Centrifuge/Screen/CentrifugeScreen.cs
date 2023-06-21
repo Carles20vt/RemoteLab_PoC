@@ -10,12 +10,6 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
 {
     public class CentrifugeScreen : TreeislandBehaviour
     {
-        #region Public Properties
-
-        [SerializeField] [Range(0f, 10f)] private float runningTime = 3f;
-
-        #endregion
-
         #region Private properties
 
         private Transform centrifugeParentTransform;
@@ -63,18 +57,11 @@ namespace RemoteLab.Machinery.Centrifuge.Screen
         public void OnStartButtonPressed()
         {
             photonView.RPC(nameof(PublishCentrifugeRunningStatusChanged), RpcTarget.All, true);
-
-            Invoke(nameof(EndCentrifugeProcess), runningTime);
         }
         
         #endregion
 
         #region Private Methods
-
-        private void EndCentrifugeProcess()
-        {
-            photonView.RPC(nameof(PublishCentrifugeRunningStatusChanged), RpcTarget.All, false);
-        }
         
         [PunRPC]
         private void PublishCentrifugeRunningStatusChanged(bool centrifugeStatus)

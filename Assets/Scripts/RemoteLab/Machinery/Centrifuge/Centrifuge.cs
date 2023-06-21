@@ -155,6 +155,8 @@ namespace RemoteLab.Machinery.Centrifuge
             }
 
             IsStarted = message.IsStarted;
+
+            StartInstrumentStateMachine();
         }
 
         #endregion
@@ -191,7 +193,10 @@ namespace RemoteLab.Machinery.Centrifuge
             OpenTopCoverState = new OpenTopCoverState(this, instrumentStateMachine);
             RemoveSamplesState = new RemoveSamplesState(this, instrumentStateMachine);
             RunningState = new RunningState(this, instrumentStateMachine);
-            
+        }
+
+        private void StartInstrumentStateMachine()
+        {
             instrumentStateMachine.Initialize(IdleState);
         }
 
