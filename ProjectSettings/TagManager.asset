@@ -14,8 +14,8 @@ TagManager:
   - UI
   - Interactable
   - NonInteractable
-  - 
-  - 
+  - Player
+  - PhysicalCollider
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: UI
+    uniqueID: 3787753595
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
