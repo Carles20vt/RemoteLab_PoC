@@ -3,6 +3,7 @@ using System.Linq;
 using Photon.Pun;
 using Unity.VisualScripting;
 using UnityEngine;
+
 namespace RemoteLab.Network
 {
     public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks

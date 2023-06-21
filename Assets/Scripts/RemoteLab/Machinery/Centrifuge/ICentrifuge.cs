@@ -17,6 +17,8 @@ namespace RemoteLab.Machinery.Centrifuge
         
         bool IsCentrifugationFinished { get; }
         
+        bool IsStarted { get; }
+        
         
         ClosedTopCoverState ClosedTopCoverState { get; }
         ReadyToEnterParametersState ReadyToEnterParametersState { get; }

@@ -1,5 +1,6 @@
 using System;
 using RemoteLab.Machinery.Centrifuge.Lid.Messages;
+using RemoteLab.Machinery.Centrifuge.Messages;
 using RemoteLab.Machinery.Centrifuge.Parameters.Messages;
 using RemoteLab.Machinery.Centrifuge.Rotor.Messages;
 using RemoteLab.Machinery.Centrifuge.Screen.Messages;
@@ -19,6 +20,7 @@ namespace RemoteLab.Machinery.Centrifuge
         public bool IsEnteringParameters { get; private set; }
         public bool IsParametersEntered { get; private set; }
         public bool IsCentrifugationFinished { get; private set; }
+        public bool IsStarted { get; private set; }
 
         public IdleState IdleState { get; private set; }
         public ClosedTopCoverState ClosedTopCoverState { get; private set; }
@@ -101,8 +103,9 @@ namespace RemoteLab.Machinery.Centrifuge
             eventAgent.Subscribe<CentrifugeRotorChanged>(OnCentrifugeRotorChanged);
             eventAgent.Subscribe<CentrifugeParametersChanged>(OnCentrifugeParametersChanged);
             eventAgent.Subscribe<CentrifugeRunningStatusChanged>(OnCentrifugeRunningStatusChanged);
+            eventAgent.Subscribe<CentrifugeStarted>(OnCentrifugeStarted);
         }
-        
+
         private void OnCentrifugeLidChanged(CentrifugeLidChanged message)
         {
             if (!ReferenceEquals(transform, message.Sender))
@@ -143,7 +146,19 @@ namespace RemoteLab.Machinery.Centrifuge
             IsParametersEntered = message.IsRunning;
             IsCentrifugationFinished = !message.IsRunning;
         }
-        
+
+        private void OnCentrifugeStarted(CentrifugeStarted message)
+        {
+            if (!ReferenceEquals(transform, message.Sender))
+            {
+                return;
+            }
+
+            IsStarted = message.IsStarted;
+
+            StartInstrumentStateMachine();
+        }
+
         #endregion
         
         #region Public Methods
@@ -178,7 +193,10 @@ namespace RemoteLab.Machinery.Centrifuge
             OpenTopCoverState = new OpenTopCoverState(this, instrumentStateMachine);
             RemoveSamplesState = new RemoveSamplesState(this, instrumentStateMachine);
             RunningState = new RunningState(this, instrumentStateMachine);
-            
+        }
+
+        private void StartInstrumentStateMachine()
+        {
             instrumentStateMachine.Initialize(IdleState);
         }
 
