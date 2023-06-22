@@ -23,6 +23,7 @@ Material:
   m_Name: FloorTiles02b
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ValidKeywords:
+  - _ENVIRONMENTREFLECTIONS_OFF
   - _METALLICSPECGLOSSMAP
   - _NORMALMAP
   - _OCCLUSIONMAP
@@ -39,7 +40,7 @@ Material:
     m_TexEnvs:
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: 010a1b664027c33419a6c2e41c6833e6, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 1, y: 7}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 2800000, guid: 90260e4ddac7fe441ae9ca52f7226126, type: 3}
@@ -63,7 +64,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 010a1b664027c33419a6c2e41c6833e6, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 1, y: 7}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 2800000, guid: 92400d6612d9c934ebbc089fc1a6146e, type: 3}
@@ -105,7 +106,7 @@ Material:
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _EnvironmentReflections: 1
+    - _EnvironmentReflections: 0
     - _GlossMapScale: 0.8
     - _Glossiness: 0.5
     - _GlossyReflections: 1
