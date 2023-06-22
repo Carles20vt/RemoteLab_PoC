@@ -2857,46 +2857,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5964671478640786750, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5964671478640786751, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
-        type: 3}
-      propertyPath: m_Interactable
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5964671479116112351, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5964671479406412473, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
+    - target: {fileID: 5964671478640786737, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5964671479956242076, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5964671479956242077, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5964671480056643696, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
         type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 2069128285}
-    - target: {fileID: 5964671480056643696, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5964671480056643699, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
         type: 3}
       propertyPath: m_Name
@@ -3005,11 +2980,6 @@ PrefabInstance:
     - target: {fileID: 5964671480056643711, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5964671480064253975, guid: fea8b4c3432a24bb29afb1b5b0b86ee2,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

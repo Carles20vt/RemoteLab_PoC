@@ -4,6 +4,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TreeislandStudio.Engine.Environment;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace RemoteLab.Network
@@ -13,6 +14,7 @@ namespace RemoteLab.Network
         #region Public Properties
 
         [SerializeField] private GameObject roomUI;
+        [SerializeField] private Button connectButton;
         [SerializeField] private List<DefaultRoom> defaultRooms;
         
         #endregion
@@ -52,7 +54,12 @@ namespace RemoteLab.Network
         
         private void Start()
         {
-            PhotonNetwork.OfflineMode = !isPunEnabled;
+            ConfigureScene();
+        }
+
+        private void OnEnable()
+        {
+            ConfigureScene();
         }
         
         #endregion
@@ -67,7 +74,7 @@ namespace RemoteLab.Network
 
             if (!isPunEnabled)
             {
-                ShowUI();
+                ShowRoomButtons();
                 return;
             }
 
@@ -85,7 +92,7 @@ namespace RemoteLab.Network
                 return;
             }
 
-            ShowUI();
+            ShowRoomButtons();
         }
 
         public override void OnJoinedRoom()
@@ -146,15 +153,44 @@ namespace RemoteLab.Network
         #endregion
 
         #region Private Methods
-        
-        private void ShowUI()
+
+        private void ConfigureScene()
         {
-            if (roomUI == null)
+            PhotonNetwork.OfflineMode = !isPunEnabled;
+
+            if (isPunEnabled)
             {
+                ShowConnectButton();
                 return;
             }
-            
-            roomUI.SetActive(true);
+
+            ShowRoomButtons();
+        }
+
+        private void ShowConnectButton()
+        {
+            if (roomUI != null)
+            {
+                roomUI.SetActive(false);
+            }
+
+            if (connectButton != null)
+            {
+                connectButton.gameObject.SetActive(true);
+            }
+        }
+
+        private void ShowRoomButtons()
+        {
+            if (roomUI != null)
+            {
+                roomUI.SetActive(true);
+            }
+
+            if (connectButton != null)
+            {
+                connectButton.gameObject.SetActive(false);
+            }
         }
 
         private void LoadScene(DefaultRoom roomSettings)
